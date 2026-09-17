@@ -1,0 +1,6 @@
+#!/bin/bash
+
+math_path="/home/rasmus/Documents/skola/diskreetin-matikan-perusteet" 
+
+xdg-open "$math_path/diskreetin-matikan-luentomoniste.pdf" &
+xdg-open "$math_path/uppgifter/ex3a.pdf" &
