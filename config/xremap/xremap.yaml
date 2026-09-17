@@ -1,0 +1,16 @@
+keymap:
+  - name: Helium Browser Remaps
+    application:
+      only: [helium]
+    remap:
+      C-j: C-PageUp
+      C-semicolon: C-PageDown     # 'ö' corresponds to physical 'semicolon' in Linux evdev
+      C-A-j: A-Left
+      C-A-semicolon: A-Right
+
+  - name: GNOME Papers Remaps
+    application:
+      only: [org.gnome.Papers]
+    remap:
+      C-k: Down
+      C-l: Up

@@ -1,1 +1,234 @@
-/home/rasmus/.config/niri/config.kdl
+// xremap to remap application specific shortcuts where not possible otherwise
+spawn-sh-at-startup "/usr/bin/xremap --device /dev/input/event3 $HOME/.config/xremap/config.yml"
+
+// Ask applications to omit their client-side decorations
+// Required for programs like localsend to not resize themselves on launch.
+prefer-no-csd
+
+// launch Noctalia
+spawn-at-startup "noctalia"
+
+input {
+	keyboard {
+	xkb {
+		layout "fi"
+        }
+	}
+	touchpad {
+		tap
+		natural-scroll
+	}
+}
+
+output "eDP-1" {
+	mode "1920x1080@60.033"
+	scale 1.25
+	position x=192 y=1080
+}
+
+// second 1920x1080 monitor
+output "DP-1" {
+	mode "1920x1080@60.000"
+	position x=0 y=0 
+}
+
+layout {
+	gaps 16
+	center-focused-column "never"
+	preset-column-widths {
+	    proportion 0.33333
+	    proportion 0.5
+	    proportion 0.66667
+	}
+	default-column-width { proportion 0.5; }
+
+	focus-ring {
+		width 2
+		active-color "#ffffff"
+		// inactive-color "#000000"
+	}
+
+	border {
+		off
+	}
+
+	// make background semi-transparent, needed for overview trick
+	background-color "00000020"
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 24
+}
+
+
+// Window and layer rules
+
+// Blurred Overview Wallpaper 
+layer-rule {
+       	match namespace="^noctalia-backdrop"
+	place-within-backdrop true
+}
+
+// rounded corners 
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+
+}
+
+// Don't draw background for terminal, needed for transparency
+// com.mitchellh.ghostty
+window-rule {
+	match app-id="Alacritty"
+	match app-id="com.mitchellh.ghostty"
+	draw-border-with-background false
+	background-effect {
+		blur true 
+	}
+}
+
+// localsend resizes itself when launched, maybe one day this will work
+window-rule {
+	match app-id="org.localsend.localsend_app"
+ 	match app-id="com.belmoussaoui.Authenticator"
+	open-floating true
+ 	default-column-width { fixed 400; }
+ 	default-window-height { fixed 500; }
+	default-floating-position x=1090 y=280 relative-to="bottom-left"
+}
+
+window-rule {
+	match app-id="com.belmoussaoui.Authenticator"
+	match app-id="Proton Pass"
+	block-out-from "screen-capture"
+}
+
+// Add blur and opacity to GNOME apps.
+window-rule {
+	match app-id="org.gnome.Nautilus"
+	match app-id="org.gnome.Calculator"
+	match app-id="org.gnome.Logs"
+	match app-id="org.gnome.Papers" title="^Document Viewer$"
+	match app-id="org.gnome.Loupe" title="^Image Viewer$"
+	match app-id="dev.noctalia.Noctalia" title="^Noctalia Settings$"
+	match app-id="org.localsend.localsend_app"
+	match app-id="com.belmoussaoui.Authenticator"
+	draw-border-with-background false
+	opacity 0.85
+	background-effect {
+                blur true
+        }
+}
+
+ 
+window-rule {
+	match app-id="helium"
+	draw-border-with-background false
+	opacity 0.90
+	background-effect {
+                blur true
+        }
+}
+
+// Open calculator floating on right of screen 
+window-rule {
+	match app-id="org.gnome.Calculator"
+	open-floating true
+	default-floating-position x=1140 y=180  relative-to="bottom-left"
+}
+
+hotkey-overlay {
+	skip-at-startup
+}
+		
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+binds {
+	// Terminal / Application / Menu / Lock screen
+	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn "ghostty" "--gtk-single-instance=true"; }
+	Mod+C		hotkey-overlay-title="Open calculator"				{ spawn-sh "noctalia msg panel-open launcher '/calc '"; }
+	// Tell localsend to route the file-choser request by launching it with GTK_USE_PORTAL=1 
+	Mod+S		hotkey-overlay-title="Open localsend"				{ spawn-sh "GTK_USE_PORTAL=1 localsend %U"; }
+	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
+	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
+	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass %U"; }
+	Mod+A		hotkey-overlay-title="Open 2FA: authenticator"			{ spawn-sh "authenticator"; } // env WEBKIT_DISABLE_DMABUF_RENDERER=1 proton-authenticator"; }
+  	Mod+D 		hotkey-overlay-title="Run application launcher" 		{ spawn-sh "noctalia msg panel-open launcher"; }
+	Mod+Escape 	hotkey-overlay-title="Power options" 				{ spawn-sh "noctalia msg panel-open session"; }
+
+	// Audio / Sound 
+	XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up 10%"; }
+	XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down 10%"; }
+	XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+	XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
+
+	// Brightness
+	XF86MonBrightnessUp 	allow-when-locked=true { spawn-sh "noctalia msg brightness-up current 10%"; }
+	XF86MonBrightnessDown 	allow-when-locked=true { spawn-sh "noctalia msg brightness-down current 10%"; }
+
+	// Toggle overview (four-finger swipe)
+	Mod+O repeat=false { toggle-overview; }
+	
+	// Close window
+	Mod+Q repeat=false { close-window; }
+
+	// Moving around windows
+	Mod+Left  	{ focus-column-left; }
+	Mod+Down  	{ focus-window-or-workspace-down; }
+	Mod+Up    	{ focus-window-or-workspace-up; }
+	Mod+Right 	{ focus-column-right; }
+	Mod+J     	{ focus-column-left; }
+	Mod+K     	{ focus-window-or-workspace-down; }
+	Mod+L     	{ focus-window-or-workspace-up; }
+	Mod+odiaeresis 	{ focus-column-right; }
+
+	Mod+Shift+Left  	{ move-column-left; }
+	Mod+Shift+Down  	{ move-window-up; }
+	Mod+Shift+Up    	{ move-window-down; }
+	Mod+Shift+Right 	{ move-column-right; }
+	Mod+Shift+J     	{ move-column-left; }
+	Mod+Shift+K     	{ move-window-down-or-to-workspace-down; }
+	Mod+Shift+L 		{ move-window-up-or-to-workspace-up; }
+	Mod+Shift+odiaeresis 	{ move-column-right; }
+
+	// Mouse
+	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+	// Move between workspaces
+	Mod+1 { focus-workspace 1; }
+	Mod+2 { focus-workspace 2; }
+	Mod+3 { focus-workspace 3; }
+
+	// Move windows between workspaces
+	Mod+Shift+1 { move-window-to-workspace 1; }
+	Mod+Shift+2 { move-window-to-workspace 2; }
+	Mod+Shift+3 { move-window-to-workspace 3; }
+
+	Mod+R { switch-preset-column-width; }
+	
+	Mod+F       { maximize-column; }
+	Mod+Shift+F { fullscreen-window; }
+	Mod+Ctrl+F  { expand-column-to-available-width; }
+	
+	// Consume one window from the right to the bottom of the focused column.
+	Mod+Comma  { consume-window-into-column; }
+	// Expel the bottom window from the focused column to the right.
+	Mod+Period { expel-window-from-column; }
+
+	Print       							{ screenshot; }
+	Ctrl+Print  hotkey-overlay-title="Screenshot entire screen" 	{ screenshot-screen; }
+	Alt+Print   hotkey-overlay-title="Screenshot window" 		{ screenshot-window; }
+
+	// Move the focused window between the floating and the tiling layout.
+	Mod+V       { toggle-window-floating; }
+	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+	// The quit action will show a confirmation dialog to avoid accidental exits.
+	Mod+Shift+E { quit; }
+
+	Mod+H { show-hotkey-overlay; }
+}
+
+include "noctalia.kdl"
