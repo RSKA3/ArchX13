@@ -108,6 +108,7 @@ To configure xremap it requires the user to:
 Source: AUR localsend-bin
 
 To configure localsend with firewalld it requires that you enable the port 53317.
+
 	1. sudo firewall-cmd --permanent --add-port=53317/tcp
 	2. sudo firewall-cmd --permanent --add-port=53317/udp
 	3. sudo firewall-cmd --reload
