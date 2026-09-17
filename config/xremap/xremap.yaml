@@ -4,7 +4,7 @@ keymap:
       only: [helium]
     remap:
       C-j: C-PageUp
-      C-semicolon: C-PageDown     # 'ö' corresponds to physical 'semicolon' in Linux evdev
+      C-semicolon: C-PageDown
       C-A-j: A-Left
       C-A-semicolon: A-Right
 
