@@ -12,5 +12,7 @@ keymap:
     application:
       only: [org.gnome.Papers]
     remap:
+      C-j: Left
       C-k: Down
       C-l: Up
+      C-semicolon: Right

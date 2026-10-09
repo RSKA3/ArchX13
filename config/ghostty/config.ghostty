@@ -3,3 +3,11 @@ background-opacity = 0.7
 window-decoration = none
 window-padding-x = 5 
 window-padding-y = 5
+
+
+# Split the window (opens a new split to the right)
+keybind = ctrl+t=new_split:right
+
+# Navigate between splits
+keybind = ctrl+j=goto_split:left
+keybind = ctrl+ö=goto_split:right

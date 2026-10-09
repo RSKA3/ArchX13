@@ -1,6 +1,8 @@
 // xremap to remap application specific shortcuts where not possible otherwise
-spawn-sh-at-startup "/usr/bin/xremap --device /dev/input/event3 $HOME/.config/xremap/config.yml"
-
+// is this launched by user or root?
+// --device /dev/input/event3
+spawn-sh-at-startup "/usr/bin/xremap $HOME/.config/xremap/config.yml"
+ 
 // Ask applications to omit their client-side decorations
 // Required for programs like localsend to not resize themselves on launch.
 prefer-no-csd
@@ -10,9 +12,10 @@ spawn-at-startup "noctalia"
 
 input {
 	keyboard {
-	xkb {
-		layout "fi"
-        }
+		xkb {
+			layout "fi"
+                    		variant "nodeadkeys"
+		}
 	}
 	touchpad {
 		tap
@@ -24,12 +27,6 @@ output "eDP-1" {
 	mode "1920x1080@60.033"
 	scale 1.25
 	position x=192 y=1080
-}
-
-// second 1920x1080 monitor
-output "DP-1" {
-	mode "1920x1080@60.000"
-	position x=0 y=0 
 }
 
 layout {
@@ -77,17 +74,6 @@ window-rule {
 
 }
 
-// Don't draw background for terminal, needed for transparency
-// com.mitchellh.ghostty
-window-rule {
-	match app-id="Alacritty"
-	match app-id="com.mitchellh.ghostty"
-	draw-border-with-background false
-	background-effect {
-		blur true 
-	}
-}
-
 // localsend resizes itself when launched, maybe one day this will work
 window-rule {
 	match app-id="org.localsend.localsend_app"
@@ -106,15 +92,18 @@ window-rule {
 
 // Add blur and opacity to GNOME apps.
 window-rule {
+	match app-id="Alacritty"
+	match app-id="com.mitchellh.ghostty"
 	match app-id="org.gnome.Nautilus"
 	match app-id="org.gnome.Calculator"
 	match app-id="org.gnome.Logs"
 	match app-id="org.gnome.Papers" title="^Document Viewer$"
 	match app-id="org.gnome.Loupe" title="^Image Viewer$"
 	match app-id="dev.noctalia.Noctalia" title="^Noctalia Settings$"
+	match app-id="com.github.johnfactotum.Foliate" title="^Foliate$"
 	match app-id="org.localsend.localsend_app"
-	match app-id="com.belmoussaoui.Authenticator"
 	draw-border-with-background false
+	match app-id="com.belmoussaoui.Authenticator"
 	opacity 0.85
 	background-effect {
                 blur true
@@ -167,6 +156,9 @@ binds {
 	XF86MonBrightnessUp 	allow-when-locked=true { spawn-sh "noctalia msg brightness-up current 10%"; }
 	XF86MonBrightnessDown 	allow-when-locked=true { spawn-sh "noctalia msg brightness-down current 10%"; }
 
+	// 
+	XF86NotificationCenter { spawn-sh "noctalia msg settings-open"; }
+
 	// Toggle overview (four-finger swipe)
 	Mod+O repeat=false { toggle-overview; }
 	
@@ -217,16 +209,13 @@ binds {
 	// Expel the bottom window from the focused column to the right.
 	Mod+Period { expel-window-from-column; }
 
-	Print       							{ screenshot; }
+	Print       hotkey-overlay-title="Screenshot"			{ screenshot; }
 	Ctrl+Print  hotkey-overlay-title="Screenshot entire screen" 	{ screenshot-screen; }
 	Alt+Print   hotkey-overlay-title="Screenshot window" 		{ screenshot-window; }
 
 	// Move the focused window between the floating and the tiling layout.
 	Mod+V       { toggle-window-floating; }
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-	// The quit action will show a confirmation dialog to avoid accidental exits.
-	Mod+Shift+E { quit; }
 
 	Mod+H { show-hotkey-overlay; }
 }
