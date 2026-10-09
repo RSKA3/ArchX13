@@ -18,6 +18,10 @@ Structure:
 
 Root directory is encrypted with LUKS2 using cryptsetup.
 
+systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
+  --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 \
+  /dev/encrypted-device
+
 ## RAM
 
 Type: ZRAM
