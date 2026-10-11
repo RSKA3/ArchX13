@@ -156,9 +156,10 @@ binds {
 	XF86MonBrightnessUp 	allow-when-locked=true { spawn-sh "noctalia msg brightness-up current 10%"; }
 	XF86MonBrightnessDown 	allow-when-locked=true { spawn-sh "noctalia msg brightness-down current 10%"; }
 
-	// 
-	XF86NotificationCenter { spawn-sh "noctalia msg settings-open"; }
-
+	// function keys 
+	XF86NotificationCenter 	{ spawn-sh "noctalia msg settings-open"; }
+	XF86PickupPhone 	{ spawn-sh "noctalia msg bluetooth-toggle"; }
+	
 	// Toggle overview (four-finger swipe)
 	Mod+O repeat=false { toggle-overview; }
 	
