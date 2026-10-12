@@ -186,8 +186,17 @@ binds {
 	Mod+Shift+odiaeresis 	{ move-column-right; }
 
 	// Mouse
-	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+	Mod+Ctrl+WheelScrollUp          cooldown-ms=150 { focus-workspace-up; }
+	Mod+Ctrl+WheelScrollDown        cooldown-ms=150 { focus-workspace-down; }
+	Mod+Ctrl+Shift+WheelScrollUp    cooldown-ms=150 { move-window-up-or-to-workspace-up; }
+	Mod+Ctrl+Shift+WheelScrollDown  cooldown-ms=150 { move-window-down-or-to-workspace-down; }
+
+	Mod+WheelScrollUp               cooldown-ms=150 { focus-column-left; }
+	Mod+WheelScrollDown             cooldown-ms=150 { focus-column-right; }
+	Mod+Shift+WheelScrollUp         cooldown-ms=150 { move-column-left; }
+	Mod+Shift+WheelScrollDown       cooldown-ms=150 { move-column-right; }
+
+	Mod+MouseRight { toggle-overview; }
 
 	// Move between workspaces
 	Mod+1 { focus-workspace 1; }
@@ -198,7 +207,8 @@ binds {
 	Mod+Shift+1 { move-window-to-workspace 1; }
 	Mod+Shift+2 { move-window-to-workspace 2; }
 	Mod+Shift+3 { move-window-to-workspace 3; }
-
+	
+	// Resize & fullscreen 
 	Mod+R { switch-preset-column-width; }
 	
 	Mod+F       { maximize-column; }
