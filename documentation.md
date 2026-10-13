@@ -3,15 +3,36 @@ Documentation for my Thinkpad X13 Gen 1 running Arch Linux.
 
 **Table of Contents**
 - [Technical information](#technical-information)
+  - [Hardware](#hardware)
   - [Filesystem](#filesystem)
+    - [File syncing](#file-syncing)
+    - [Backups](#backups)
+  - [RAM](#ram)
+  - [Security](#security)
+  - [Bootloader & Snapshots](#bootloader--snapshots)
+- [Programs](#programs)
+  - [System](#system)
+  - [Default GUIs](#default-guis)
+  - [CLI tools](#cli-tools)
+  - [Web apps](#web-apps)
+- [Shortcuts](#shortcuts)
+  - [Navigation](#navigation)
+    - [Keyboard](#keyboard)
+    - [Mouse](#mouse)
+  - [System](#system-1)
+  - [Programs](#programs-1)
 
 ## Technical information
 
 ### Hardware
 
-* CPU: i7-10710U @ 1.10GHz
-* RAM: 16 GB (2x 8 GB Micron DDR4 SODIMM @ 2667 MHz / rated 3200 MHz)
-* MEMORY: 256GB NVMe (Intel SSDPEKKF256G8L)
+CPU: i7-10710U @ 1.10GHz
+
+RAM: 16 GB (2x 8 GB Micron DDR4 SODIMM @ 2667 MHz / rated 3200 MHz)
+
+MEMORY: 256GB NVMe (Intel SSDPEKKF256G8L)
+
+---
 
 ### Filesystem
 Type: btrfs
@@ -35,11 +56,25 @@ systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
   --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 \
   /dev/encrypted-device
 
+#### File syncing
+
+Certain folders are being synced between my machines using Syncthing.
+
+Syncthing is being ran as a user service. 
+
+#### Backups
+
+TODO: Set up backups with rclone.
+
+---
+
 ### RAM
 
 Type: ZRAM
 
 Amount: 8 GiB which equals half of my RAM.
+
+---
 
 ### Security
 
@@ -47,7 +82,7 @@ TPM2 and Secure boot are both enabled, the UEFI settings are also password locke
 
 The key is signed with the Microsoft key.
 
-
+---
 
 ### Bootloader & Snapshots
 
@@ -55,7 +90,7 @@ GRUB2 is used as the bootloader.
 
 Snapshots are configured with Snapper and snap-pac for the root directory.
 
-
+---
 
 ## Programs
 
@@ -345,7 +380,7 @@ In addition these most programs can be navigated similarly with `Ctrl` in place 
 
 You can also hold `Shift` down while using these keybinds to move around windows.
 
-#### Keyboard
+#### Mouse
 
 | Key Binding | Action |
 | :--- | :--- |
