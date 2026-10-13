@@ -1,0 +1,10 @@
+[Default Applications]
+# Images
+image/png=org.gnome.Loupe.desktop
+image/svg+xml=org.gnome.Loupe.desktop
+# Directories
+inode/directory=org.gnome.Nautilus.desktop
+# Text files
+application/pdf=org.gnome.Papers.desktop
+text/plain=codium.desktop
+text/markdown=codium.desktop
