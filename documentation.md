@@ -35,26 +35,40 @@ MEMORY: 256GB NVMe (Intel SSDPEKKF256G8L)
 ---
 
 ### Filesystem
-Type: btrfs
 
-Compression: zstd:1 
+I have two block devices:
+```
+nvme0n1
+├─nvme0n1p1   2G        vfat      (unencrypted boot drive)
+└─nvme0n1p2   236.5G    btrfs     (encrypted root filesystem)
+```
 
-Additional flags: noatime
+I have chosen **btrfs** filesystem because it supports snapshots, since I am on a rolling release system. 
 
-Structure:
+I use the default compression algorithm **zstd** with the level set to 1 because I have fast nvme memory and I don't want to limit read and write speeds.  
 
-    /boot
-    /               @
-    /home           @home
-    /var/log        @var_logs
-    /var/cache      @var_cache
-    /.snapshots     @snapshots
+As a additional flag I have **noatime** because it conflicts with btrfs' Copy-on-Write. 
+
+```
+/                   (@)
+├── boot            (Boot Drive)
+├── home            (@home)
+├── var
+│   ├── log         (@var_log)
+│   ├── tmp         (@var_tmp)
+│   └── cache       (@var_cache)
+└── .snapshots      (@snapshots)
+```
 
 Root directory is encrypted with LUKS2 using cryptsetup.
 
 systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
   --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 \
   /dev/encrypted-device
+
+#### Snapshots
+
+Snapshots are configured with Snapper and snap-pac for the root directory.
 
 #### File syncing
 
@@ -68,43 +82,102 @@ TODO: Set up backups with rclone.
 
 ---
 
-### RAM
+### Swap
 
-Type: ZRAM
+I've chosen **ZRAM** because it's fast, simple and I don't need hibernation. 
 
-Amount: 8 GiB which equals half of my RAM.
+I have used **zram-generator** to set up a device with 8 GiB or **half of my RAM**.
+
+#### Configuration File
+`/etc/systemd/zram-generator.conf`
+
+```ini
+[zram0]
+zram-size = min(ram / 2)
+```
+
+---
+
+### Booting & Security
+
+**GRUB2** is the bootloader.
+
+TPM2 and Secure boot are both enabled and the UEFI settings are password protected.
+
+#### GRUB2
+
+TODO
+
+#### Secure boot
+
+Secure boot keys have been created and enrolled with **sbctl** using the microsoft shim. 
+
+GRUB and the kernel have been signed:
+
+```
+/boot/vmlinuz-linux
+/boot/EFI/GRUB/grubx64.efi
+```
+
+### Firmware & Services
+
+pipewire pipewire-pulse pipewire-audio pipewire-jack pipewire-alsa
+
+wireplumber
+
+sof-firmware
+
+intel-ucode
+
+
+#### Networking & Bluetooth
+
+
+**NetworkManager** is being used with **iwd** as the backend.
+
+TODO mention **systemd-resolved**
+
+A network firewall has been set up by enabling the **firewalld system service**.
+
+**bluez**'s **bluetooth.service** handles bluetooth.
 
 ---
 
-### Security
+### Problems & Shortcomings
 
-TPM2 and Secure boot are both enabled, the UEFI settings are also password locked.
+The kernel lives on another drive and isn't snapshotted. This can yield two kinds of problems:
 
-The key is signed with the Microsoft key.
+1. Newer kernels may break the system and can't be downgraded without booting from a live usb.
+2. When rolling back, a later kernel may be incompatible with previous versions of programs.  
 
----
-
-### Bootloader & Snapshots
-
-GRUB2 is used as the bootloader.
-
-Snapshots are configured with Snapper and snap-pac for the root directory.
-
----
+Hiberanation is not possible with the current setup. This would require a swap device on the SSD. 
 
 ## Programs
 
+TODO: Reflector here or in services?
+
+The Arch User Repository (AUR) has been enabled by installing Yet another Yogurt (yay). 
+
+https://github.com/jguer/yay#binary
+
 ### System
 
+The default associations are included in `ArchX13/config/mimeapps.list`.
+
 #### Ly
+
 Login manager.
 
-**Source:** `Extra/ly`
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `AUR/ly` |
+
+`ly@tty1.service` enabled.
 
 ---
 
 #### Niri
-Scrolling compositor.
+Scrollable-tiling compositor.
 
 | Attribute | Details |
 | :--- | :--- |
@@ -226,7 +299,7 @@ Terminal emulator.
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/ghostty` |
-| **Config Path** | `~/.config/niri/config.ghostty` |
+| **Config Path** | `~/.config/ghostty/config.ghostty` |
 
 ---
 
@@ -276,6 +349,8 @@ Code editor.
 
 Install NoctaliaTheme to enable custom theme.
 
+https://docs.noctalia.dev/noctalia/templates/community/vscode/?section=setup#setup
+
 ---
 
 #### Telegram
@@ -295,7 +370,27 @@ https://github.com/Alexandr-Sol/telegram-theme-noctalia#applying-the-theme-in-te
 
 ---
 
+#### Proton Pass
+
+Password Manager.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `AUR/proton-pass-bin` |
+
+---
+
 ### CLI tools
+
+#### vim
+
+Text editor.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `AUR/vim` |
+
+---
 
 #### Xremap
 
@@ -359,7 +454,9 @@ A selection of web apps created with helium browser.
 
 ## Shortcuts
 
-`Mod` refers to windows key.
+`Mod` refers to the windows key.
+
+NOTE: I am using a Finnish keyboard.
 
 ### Navigation
 
@@ -393,12 +490,12 @@ You can also hold `Shift` down while using these keybinds to move around windows
 
 | Key Binding | Action |
 | :--- | :--- |
-| `Mod` + `D` | Program launcher |
+| `Mod` + `D` | Program launcher (Noctalia) |
 | `Mod` + `Esc` | Session manager |
 | `Mod`/`Ctrl` + `Q` | Quit (Program / Window) |
 | `Mod`/`Ctrl` + `T` | New (Terminal / Window) |
 | `Mod` + `O` | Overview |
-| `Mod` + `H` | Help |
+| `Mod` + `H` | Niri Keybinds (Help) |
 | `PrtSc` | Screenshot |
 | `Shift` + `PrtSc` | Screenshot screen |
 | `Alt` + `PrtSc` | Screenshot window |
