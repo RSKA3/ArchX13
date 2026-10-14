@@ -14,8 +14,8 @@ environment {
 // launch Noctalia
 spawn-at-startup "noctalia"
 
-// monitor setup
-include "monitors/desktop.kdl"
+// monitor setup, symlinked from "ArchX13/config/niri/monitors/[monitor].kdl" to "~/.config/niri/monitor-setup.kdl"
+include "monitor-setup.kdl"
 
 input {
 	keyboard {
