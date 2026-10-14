@@ -10,6 +10,9 @@ prefer-no-csd
 // launch Noctalia
 spawn-at-startup "noctalia"
 
+// monitor setup
+include "monitors/desktop.kdl"
+
 input {
 	keyboard {
 		xkb {
@@ -21,12 +24,6 @@ input {
 		tap
 		natural-scroll
 	}
-}
-
-output "eDP-1" {
-	mode "1920x1080@60.033"
-	scale 1.25
-	position x=192 y=1080
 }
 
 layout {
