@@ -1,0 +1,14 @@
+[
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "ctrl+[Semicolon]",
+        "command": "workbench.action.nextEditor"
+    }
+]
