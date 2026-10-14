@@ -208,9 +208,7 @@ The cursor I am using is called [Bibata Modern Ice](https://www.gnome-look.org/p
 
 TODO: Reflector here or in services?
 
-The Arch User Repository (AUR) has been enabled by installing Yet another Yogurt (yay). 
-
-https://github.com/jguer/yay#binary
+The Arch User Repository (AUR) has been enabled by installing [Yet another Yogurt](https://github.com/jguer/yay#binary) (yay). 
 
 ### System
 
