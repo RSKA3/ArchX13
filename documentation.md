@@ -43,9 +43,11 @@ nvme0n1
 └─nvme0n1p2   236.5G    btrfs     (encrypted root filesystem)
 ```
 
-I have chosen **btrfs** filesystem because it supports snapshots, since I am on a rolling release system. 
+#### btrfs
 
-I use the default compression algorithm **zstd** with the level set to 1 because I have fast nvme memory and I don't want to limit read and write speeds.  
+I have chosen **btrfs** as my filesystem because it supports snapshots, being able to roll back the system is important since Arch is rolling release. 
+
+I use the default **zstd** compression algorithm with the level set to 1 because I have fast nvme memory and I don't want the CPU limiting my read and write speed.  
 
 As a additional flag I have **noatime** because it conflicts with btrfs' Copy-on-Write. 
 
@@ -60,7 +62,19 @@ As a additional flag I have **noatime** because it conflicts with btrfs' Copy-on
 └── .snapshots      (@snapshots)
 ```
 
-Root directory is encrypted with LUKS2 using cryptsetup.
+#### encryption
+
+The root directory is encrypted with LUKS2 using cryptsetup.
+
+```
+/etc/mkinitcpio.conf
+HOOKS=(keyboard ... sd-vconsole. ... sd-encrypt)
+```
+
+```
+rd.luks.name=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX=name
+rd.luks.options=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX=tpm2-device=auto
+```
 
 systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
   --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 \
@@ -68,15 +82,19 @@ systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
 
 #### Snapshots
 
-Snapshots are configured with Snapper and snap-pac for the root directory.
+System snapshots are managed with **snapper** and are automatically created with **snap-pac** when updating updating.
 
-#### File syncing
+Only the root directory is snapshotted and thus important files are [backed up](#file-syncing).
 
-Certain folders are being synced between my machines using Syncthing.
+#### Backups
+
+##### File syncing
+
+Specific directories are being synced between my machines using Syncthing.
 
 Syncthing is being ran as a user service. 
 
-#### Backups
+##### Cloning
 
 TODO: Set up backups with rclone.
 
@@ -106,13 +124,15 @@ TPM2 and Secure boot are both enabled and the UEFI settings are password protect
 
 #### GRUB2
 
+GRUB has been initialised with the flags:
+
 TODO
 
 #### Secure boot
 
 Secure boot keys have been created and enrolled with **sbctl** using the microsoft shim. 
 
-GRUB and the kernel have been signed:
+Both GRUB and the kernel have been signed:
 
 ```
 /boot/vmlinuz-linux
@@ -151,6 +171,38 @@ The kernel lives on another drive and isn't snapshotted. This can yield two kind
 2. When rolling back, a later kernel may be incompatible with previous versions of programs.  
 
 Hiberanation is not possible with the current setup. This would require a swap device on the SSD. 
+
+## Theming
+
+### Plymouth
+
+The boot sequence uses plymouth to create a splash screen.
+
+My plymouth theme is the [macOS themed Arch Linux Logo](https://www.gnome-look.org/p/2106821). 
+
+Remember to follow the installation guide for this theme!
+
+<img src="images/plymouth-arch-theme.png" width="300" alt="Arch plymouth theme">
+
+```
+GRUB_TIMEOUT=2
+GRUB_CMDLINE_LINUX_DEFAULT="... quiet splash ..."
+```
+
+```
+/etc/mkinitcpio.conf
+HOOKS=(... plymouth ...) # before sd-encrypt
+```
+
+---
+
+### Cursor
+
+The cursor I am using is called [Bibata Modern Ice](https://www.gnome-look.org/p/1197198).
+
+<img src="images/bibata-modern-ice.png" width="300" alt="Bibata modern ice cursor">
+
+### Fonts
 
 ## Programs
 
@@ -267,6 +319,8 @@ Chromium based web browser.
 | :--- | :--- |
 | **Source** | `AUR/helium-browser-bin` |
 
+Helium browser does ship with Digital Rights Management (DRM) software and thus you need to enable it manually:
+
 > **Note: Enabling DRM for Helium Browser**
 > 1. Download the latest [Chrome `.deb` package](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
 > 2. Extract the package:
@@ -361,12 +415,13 @@ Instant messaging program.
 | :--- | :--- |
 | **Source** | `Extra/telegram-desktop` |
 
+If you want a custom theme you need to follow the instructions [here](https://github.com/Alexandr-Sol/telegram-theme-noctalia#applying-the-theme-in-telegram).
+```
 1. Open your file manager and find the noctalia.tdesktop-theme file in the hidden ~/.cache/telegram-theme-noctalia/ folder.
 2. Drag and drop this file into Telegram (e.g., into "Saved Messages").
 3. Click on the sent file directly in the Telegram chat.
 4. A theme preview window will appear — click "Apply".
-
-https://github.com/Alexandr-Sol/telegram-theme-noctalia#applying-the-theme-in-telegram
+```
 
 ---
 
