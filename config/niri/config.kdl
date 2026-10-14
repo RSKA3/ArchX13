@@ -1,11 +1,15 @@
 // xremap to remap application specific shortcuts where not possible otherwise
-// is this launched by user or root?
-// --device /dev/input/event3
 spawn-sh-at-startup "/usr/bin/xremap $HOME/.config/xremap/config.yml"
  
 // Ask applications to omit their client-side decorations
-// Required for programs like localsend to not resize themselves on launch.
+// Required for programs like localsend to not resize themselves at launchtime.
 prefer-no-csd
+
+// Environment variables
+environment {
+    	// Forces GTK applications to use XDG Desktop Portal instead of built-in dialogs, aka. opens Nautilus instead of built in file picker. 
+	GTK_USE_PORTAL "1"
+}
 
 // launch Noctalia
 spawn-at-startup "noctalia"
@@ -75,6 +79,7 @@ window-rule {
 window-rule {
 	match app-id="org.localsend.localsend_app"
  	match app-id="com.belmoussaoui.Authenticator"
+	match app-id="org.gnome.Calculator"
 	open-floating true
  	default-column-width { fixed 400; }
  	default-window-height { fixed 500; }
@@ -99,8 +104,8 @@ window-rule {
 	match app-id="dev.noctalia.Noctalia" title="^Noctalia Settings$"
 	match app-id="com.github.johnfactotum.Foliate" title="^Foliate$"
 	match app-id="org.localsend.localsend_app"
-	draw-border-with-background false
 	match app-id="com.belmoussaoui.Authenticator"
+	draw-border-with-background false
 	opacity 0.85
 	background-effect {
                 blur true
@@ -117,13 +122,6 @@ window-rule {
         }
 }
 
-// Open calculator floating on right of screen 
-window-rule {
-	match app-id="org.gnome.Calculator"
-	open-floating true
-	default-floating-position x=1140 y=180  relative-to="bottom-left"
-}
-
 hotkey-overlay {
 	skip-at-startup
 }
@@ -134,8 +132,7 @@ binds {
 	// Terminal / Application / Menu / Lock screen
 	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn "ghostty" "--gtk-single-instance=true"; }
 	Mod+C		hotkey-overlay-title="Open calculator"				{ spawn-sh "noctalia msg panel-open launcher '/calc '"; }
-	// Tell localsend to route the file-choser request by launching it with GTK_USE_PORTAL=1 
-	Mod+S		hotkey-overlay-title="Open localsend"				{ spawn-sh "GTK_USE_PORTAL=1 localsend %U"; }
+	Mod+S		hotkey-overlay-title="Open localsend"				{ spawn-sh "localsend %U"; }
 	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
 	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
 	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass %U"; }
@@ -225,6 +222,7 @@ binds {
 	Mod+V       { toggle-window-floating; }
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
+	// Display hotkeys
 	Mod+H { show-hotkey-overlay; }
 }
 
