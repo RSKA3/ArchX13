@@ -1,0 +1,8 @@
+[wallpaper]
+directory = "~/Pictures/Wallpapers"
+
+[wallpaper.default]
+path = "/home/rasmus/Pictures/Wallpapers/ASCII-neptune.png"
+
+[wallpaper.last]
+path = "/home/rasmus/Pictures/Wallpapers/ASCII-neptune.png"

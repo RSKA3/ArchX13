@@ -1,0 +1,16 @@
+[calendar]
+
+[control_center.calendar]
+show_events_card = false
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[[control_center.shortcuts]]
+type = "power_profile"

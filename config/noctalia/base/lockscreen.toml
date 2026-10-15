@@ -1,0 +1,13 @@
+# Shared lockscreen settings. Per-output widgets and widget_order live in hosts/*.toml
+
+[lockscreen]
+fingerprint = false
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+
+[lockscreen_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true

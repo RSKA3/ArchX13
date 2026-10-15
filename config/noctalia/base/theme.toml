@@ -1,0 +1,10 @@
+[theme]
+builtin = "Noctalia"
+community_palette = "Catppuccin Frappe Lavender"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+[theme.templates]
+builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri", "qt" ]
+community_ids = [ "telegram", "vscode", "lazygit" ]

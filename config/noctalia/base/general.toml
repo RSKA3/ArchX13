@@ -1,0 +1,7 @@
+config_version = 14
+
+[location]
+auto_locate = true
+
+[plugins]
+enabled = [ "nightwatch75/file-search" ]

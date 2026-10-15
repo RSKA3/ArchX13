@@ -1,0 +1,13 @@
+[shell]
+app_icon_color = "primary"
+font_family = "JetBrains Mono"
+
+[shell.launcher]
+auto_paste = "off"
+categories = false
+
+[shell.launcher.providers.windows]
+prefix = ""
+
+[shell.panel]
+launcher_placement = "attached"

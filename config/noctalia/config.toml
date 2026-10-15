@@ -1,0 +1,5 @@
+[include]
+files = [
+    "base/",            # every *.toml in base/, sorted
+    "monitors.toml", 	# per-machine lockscreen + wallpaper monitor entries
+]
