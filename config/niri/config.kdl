@@ -115,6 +115,7 @@ window-rule {
  
 window-rule {
 	match app-id="helium"
+	match app-id=r#"^chrome-(.+?)-Default$"#
 	draw-border-with-background false
 	opacity 0.90
 	background-effect {
