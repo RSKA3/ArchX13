@@ -283,11 +283,21 @@ Desktop shell.
 
 #### Nautilus
 
-File manager
+GUI file manager
 
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/nautilus` |
+
+---
+
+#### Yazi
+
+TUI file manager
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/yazi` |
 
 ---
 
