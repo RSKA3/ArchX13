@@ -153,6 +153,7 @@ binds {
 	// function keys 
 	XF86NotificationCenter 	{ spawn-sh "noctalia msg settings-open"; }
 	XF86PickupPhone 	{ spawn-sh "noctalia msg bluetooth-toggle"; }
+	XF86Favorites		{ spawn-sh "noctalia msg panel-open launcher '/scripts '"; }	
 	
 	// Toggle overview (four-finger swipe)
 	Mod+O repeat=false { toggle-overview; }

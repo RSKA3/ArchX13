@@ -1,0 +1,26 @@
+# Type "/scripts " in the Noctalia launcher to list all scripts in ~/ArchX13/scripts/ and run by pressing enter.
+
+[shell.launcher.dmenu.entry.scripts]
+label  = "Scripts"
+prefix = "scripts" 
+glyph  = "terminal"
+
+# One result per file (subfolders included, hidden files skipped), sorted.
+command = '''
+cd "$HOME/ArchX13/scripts" 2>/dev/null && find . -type f ! -path '*/.*' -printf '%P\n' | sort
+'''
+
+# Run the selected script detached, from its own folder.
+# Executable files run as-is; otherwise .py goes to python3 and anything else to bash.
+exec = '''
+cd "$HOME/ArchX13/scripts" || exit 1
+f="$HOME/ArchX13/scripts/{selection}"
+if [ -x "$f" ]; then
+  exec "$f"
+else
+  case "$f" in
+    *.py) exec python3 "$f" ;;
+    *)    exec bash "$f" ;;
+  esac
+fi
+'''
