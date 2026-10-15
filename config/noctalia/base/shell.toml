@@ -1,6 +1,6 @@
 [shell]
 app_icon_color = "primary"
-font_family = "JetBrains Mono"
+font_family = "JetBrainsMono Nerd Font"
 
 [shell.launcher]
 auto_paste = "off"

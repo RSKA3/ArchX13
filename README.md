@@ -204,6 +204,8 @@ The cursor I am using is called [Bibata Modern Ice](https://www.gnome-look.org/p
 
 ### Fonts
 
+I am using **ttf-jetbrains-mono-nerd** as my main font, it can be found in the Extra repository.
+
 ## Programs
 
 TODO: Reflector here or in services?
