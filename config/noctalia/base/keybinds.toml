@@ -1,0 +1,3 @@
+[keybinds]
+up 	= ["ctrl+l", "up"]
+down 	= ["ctrl+k", "down"]
