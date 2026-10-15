@@ -1,8 +1,8 @@
 [wallpaper]
-directory = "~/Pictures/Wallpapers"
+directory = "~/ArchX13/wallpapers"
 
 [wallpaper.default]
-path = "/home/rasmus/Pictures/Wallpapers/ASCII-neptune.png"
+path = "~/ArchX13/wallpapers/ASCII-neptune.png"
 
 [wallpaper.last]
-path = "/home/rasmus/Pictures/Wallpapers/ASCII-neptune.png"
+path = "~/ArchX13/wallpapers/ASCII-neptune.png"

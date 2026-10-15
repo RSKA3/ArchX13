@@ -1,5 +1,5 @@
 [include]
 files = [
-    "base/",            # every *.toml in base/, sorted
-    "monitors.toml", 	# per-machine lockscreen + wallpaper monitor entries
+    "base/",              # every *.toml in base/, sorted
+    "monitors/local.toml" # symlink "ArchX13/config/noctalia/monitors/[monitor.toml]" to here. Can't symlink to bottom level config directory since those files are automatically imported by noctalia
 ]

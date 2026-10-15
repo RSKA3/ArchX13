@@ -1,17 +1,24 @@
 # Desktop (HDMI-A-1, HDMI-A-2)
 # HDMI-A-1 is a copy of the HDMI-A-2 values (2560x1440); adjust if it differs.
+# Layout mirrors the laptop's lockscreen, positions scaled from 1536x864 to 2560x1440.
 
 [lockscreen_widgets]
 widget_order = [
     "lockscreen-login-box@HDMI-A-1",
-    "lockscreen-login-box@HDMI-A-2"
+    "lockscreen-widget-0000000000000004",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-login-box@HDMI-A-2",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000001"
 ]
 
+# ---------- HDMI-A-1 ----------
+
 [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-box_height = 196.0
-box_width = 810.0
+box_height = 70.0
+box_width = 400.0
 cx = 1280.0
-cy = 898.0
+cy = 1295.0
 output = "HDMI-A-1"
 placement_height = 1440.0
 placement_width = 2560.0
@@ -25,20 +32,53 @@ background_radius = 12.0
 center_password_text = false
 input_opacity = 1.0
 input_radius = 6.0
-layout = "regular"
+layout = "compact"
 show_caps_lock = true
 show_keyboard_layout = true
 show_login_button = true
-show_media = true
-show_session_buttons = true
-show_unlock_hint = true
-show_weather = true
+show_media = false
+show_session_buttons = false
+show_unlock_hint = false
+show_weather = false
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+box_height = 0.0
+box_width = 0.0
+cx = 1280.0
+cy = 720.0
+output = "HDMI-A-1"
+placement_height = 1440.0
+placement_width = 2560.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+background = false
+clock_style = "digital"
+shadow = true
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
+box_height = 0.0
+box_width = 0.0
+cx = 1280.0
+cy = 1023.3333
+output = "HDMI-A-1"
+placement_height = 1440.0
+placement_width = 2560.0
+rotation = 0.0
+type = "media_player"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+hide_when_no_media = true
+layout = "horizontal"
+
+# ---------- HDMI-A-2 ----------
 
 [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
-box_height = 196.0
-box_width = 810.0
+box_height = 70.0
+box_width = 400.0
 cx = 1280.0
-cy = 898.0
+cy = 1295.0
 output = "HDMI-A-2"
 placement_height = 1440.0
 placement_width = 2560.0
@@ -52,11 +92,42 @@ background_radius = 12.0
 center_password_text = false
 input_opacity = 1.0
 input_radius = 6.0
-layout = "regular"
+layout = "compact"
 show_caps_lock = true
 show_keyboard_layout = true
 show_login_button = true
-show_media = true
-show_session_buttons = true
-show_unlock_hint = true
-show_weather = true
+show_media = false
+show_session_buttons = false
+show_unlock_hint = false
+show_weather = false
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+box_height = 0.0
+box_width = 0.0
+cx = 1280.0
+cy = 720.0
+output = "HDMI-A-2"
+placement_height = 1440.0
+placement_width = 2560.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+background = false
+clock_style = "digital"
+shadow = true
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+box_height = 0.0
+box_width = 0.0
+cx = 1280.0
+cy = 1023.3333
+output = "HDMI-A-2"
+placement_height = 1440.0
+placement_width = 2560.0
+rotation = 0.0
+type = "media_player"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+hide_when_no_media = true
+layout = "horizontal"
