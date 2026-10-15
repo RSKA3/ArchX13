@@ -1,5 +1,5 @@
 [mgr]
-append_keymap = [
+prepend_keymap = [
 	# Navigation
 	{ on = "j", run = "leave", desc = "Back to the parent directory" },
 	{ on = "k",      run = "arrow next", desc = "Next file" },
