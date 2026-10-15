@@ -180,9 +180,9 @@ The boot sequence uses plymouth to create a splash screen.
 
 My plymouth theme is the [macOS themed Arch Linux Logo](https://www.gnome-look.org/p/2106821). 
 
-Remember to follow the installation guide for this theme!
-
 <img src="images/plymouth-arch-theme.png" width="300" alt="Arch plymouth theme">
+
+Remember to follow the [installation guide](#theme-installation-guide) for this theme if using cryptsetup!
 
 ```
 GRUB_TIMEOUT=2
@@ -194,6 +194,28 @@ GRUB_CMDLINE_LINUX_DEFAULT="... quiet splash ..."
 HOOKS=(... plymouth ...) # before sd-encrypt
 ```
 
+#### Theme installation guide
+
+> 1. Download the theme you want.
+> 2. Unzip the .zip archive.
+> 3. Then open a terminal and run the following command (change the theme name if needed). In this example, we assume that the theme is located in the Downloads directory. If that is not the case, the path should be adjusted. 
+>    ```bash
+>    sudo cp -r ~/Downloads/arch-mac-style /usr/share/plymouth/themes/
+>    ```
+> 4. If you are using an encrypted installation, you should replace the "keymap-render.png" file. The image size may vary depending on your system. If you use the existing keymap from my theme, the keyboard layout might not display correctly. Therefore, copy the file from the Spinner theme and paste it into my theme. When using the following command, remember to replace the path (adjust the theme name in the path): 
+>    ```bash
+>    sudo cp /usr/share/plymouth/themes/spinner/keymap-render.png /usr/share/plymouth/themes/arch-mac-style/images/keymap-render.png
+>    ```
+> 5. Then run the following command to check whether the theme has been recognized. It should appear in the list:
+>    ```bash
+>    sudo plymouth-set-default-theme -l
+>    ```
+> 6. Use the following command to apply the theme. Again, replace the name if you're using a different theme:
+>    ```bash
+>    sudo plymouth-set-default-theme -R arch-mac-style
+>    ```
+> 7. Regenerate mkinitcpio: sudo mkinitcpio -P
+
 ---
 
 ### Cursor
@@ -201,6 +223,15 @@ HOOKS=(... plymouth ...) # before sd-encrypt
 The cursor I am using is called [Bibata Modern Ice](https://www.gnome-look.org/p/1197198).
 
 <img src="images/bibata-modern-ice.png" width="300" alt="Bibata modern ice cursor">
+
+[**Installation**](https://github.com/ful1e5/Bibata_Cursor#linux-x11wayland)
+```
+tar -xvf Bibata-Modern-Ice.tar.gz              # extract `Bibata.tar.gz`
+mv Bibata-Modern-Ice ~/.local/share/icons/     # Install to local users
+sudo mv Bibata-Modern-Ice /usr/share/icons/    # Install to all users
+```
+
+Alternatively all bibata cursor themes can be installed from the AUR: `bibata-cursor-theme-bin`. NOTE: this takes up about 10x as much memory (30 Mb vs 300 Mb).
 
 ### Fonts
 
@@ -344,6 +375,13 @@ Helium browser does ship with Digital Rights Management (DRM) software and thus 
 >    mv extracted/opt/google/chrome/WidevineCdm ~/.config/net.imput.helium/WidevineCdm/<Widevine version>
 >    ```
 
+**Addons**
+```
+Ublock origin
+Dark reader
+Vimium
+Proton Pass
+```
 ---
 
 #### Ghostty
