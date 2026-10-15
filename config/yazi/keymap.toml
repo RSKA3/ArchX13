@@ -1,0 +1,12 @@
+[mgr]
+append_keymap = [
+	# Navigation
+	{ on = "j", run = "leave", desc = "Back to the parent directory" },
+	{ on = "k",      run = "arrow next", desc = "Next file" },
+	{ on = "l",      run = "arrow prev", desc = "Previous file" },
+	{ on = "ö", run = "enter", desc = "Enter the child directory" },
+	
+	{ on = "q",     run = "quit",               desc = "Quit the process" },
+
+]
+
