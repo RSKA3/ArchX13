@@ -1,1 +1,6 @@
 scripts/personal
+# monitor symlink, computer specific
+config/noctalia/monitors/local.toml
+# Hide speedcrunch template symlinks
+config/noctalia/base/speedcrunch.toml
+config/noctalia/templates/speedcrunch.json 
