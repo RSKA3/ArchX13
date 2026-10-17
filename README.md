@@ -311,6 +311,21 @@ Image viewer
 
 ---
 
+
+#### Showtime
+
+Video player.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/showtime` |
+
+Additional required packages for the gstreamer backend:
+
+`gst-libav gst-plugins-bad gst-plugins-ugly`
+
+---
+
 #### Papers
 
 Document viewer.

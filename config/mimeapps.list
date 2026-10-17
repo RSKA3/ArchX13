@@ -3,6 +3,8 @@
 image/png=org.gnome.Loupe.desktop
 image/jpeg=org.gnome.Loupe.desktop
 image/svg+xml=org.gnome.Loupe.desktop
+# Video
+video/mp4=org.gnome.Showtime
 # Directories
 inode/directory=org.gnome.Nautilus.desktop
 # Text files
