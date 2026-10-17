@@ -24,6 +24,6 @@ keymap:
       C-q: C-w
       C-j: C-PageUp
       C-semicolon: C-PageDown
-      C-l: [C-a, BackSpace]
+      C-u: [C-a, BackSpace]
       C-slash: Shift-Down 
       C-minus: Shift-Up
