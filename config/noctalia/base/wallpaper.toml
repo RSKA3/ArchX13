@@ -2,7 +2,4 @@
 directory = "~/ArchX13/wallpapers"
 
 [wallpaper.default]
-path = "~/ArchX13/wallpapers/ASCII-neptune.png"
-
-[wallpaper.last]
-path = "~/ArchX13/wallpapers/ASCII-neptune.png"
+path = "~/ArchX13/wallpapers/blue-city.png"

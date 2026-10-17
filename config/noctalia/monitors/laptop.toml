@@ -1,8 +1,5 @@
 # Laptop (eDP-1)
 
-[wallpaper.monitors.eDP-1]
-path = "/home/rasmus/Pictures/Wallpapers/ASCII-neptune.png"
-
 [lockscreen_widgets]
 widget_order = [
     "lockscreen-login-box@eDP-1",
