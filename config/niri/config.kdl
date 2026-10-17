@@ -79,7 +79,7 @@ window-rule {
 window-rule {
 	match app-id="org.localsend.localsend_app"
  	match app-id="com.belmoussaoui.Authenticator"
-	match app-id="org.gnome.Calculator"
+ 	match app-id="org.speedcrunch.SpeedCrunch"
 	open-floating true
  	default-column-width { fixed 400; }
  	default-window-height { fixed 500; }
@@ -97,7 +97,7 @@ window-rule {
 	match app-id="Alacritty"
 	match app-id="com.mitchellh.ghostty"
 	match app-id="org.gnome.Nautilus"
-	match app-id="org.gnome.Calculator"
+ 	match app-id="org.speedcrunch.SpeedCrunch"
 	match app-id="org.gnome.Logs"
 	match app-id="org.gnome.Papers" title="^Document Viewer$"
 	match app-id="org.gnome.Loupe" title="^Image Viewer$"
@@ -132,7 +132,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
 	// Terminal / Application / Menu / Lock screen
 	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn "ghostty" "--gtk-single-instance=true"; }
-	Mod+C		hotkey-overlay-title="Open calculator"				{ spawn-sh "noctalia msg panel-open launcher '/calc '"; }
+	Mod+C		hotkey-overlay-title="Open calculator"				{ spawn-sh "speedcrunch"; } // noctalia msg panel-open launcher '/calc '"; }
 	Mod+S		hotkey-overlay-title="Open localsend"				{ spawn-sh "localsend %U"; }
 	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
 	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
