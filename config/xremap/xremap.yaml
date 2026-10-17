@@ -16,3 +16,14 @@ keymap:
       C-k: Down
       C-l: Up
       C-semicolon: Right
+
+  - name: SpeedCrunch Remaps
+    application:
+      only: [org.speedcrunch.SpeedCrunch]
+    remap:
+      C-q: C-w
+      C-j: C-PageUp
+      C-semicolon: C-PageDown
+      C-l: [C-a, BackSpace]
+      C-slash: Shift-Down 
+      C-minus: Shift-Up

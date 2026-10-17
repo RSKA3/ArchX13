@@ -311,7 +311,6 @@ Image viewer
 
 ---
 
-
 #### Papers
 
 Document viewer.
@@ -341,6 +340,16 @@ System event log viewer.
 | **Source** | `Extra/gnome-logs` |
 
 ---
+
+#### SpeedCrunch
+
+Calculator
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/speedcrunch` |
+
+Themed with [my own template](https://github.com/RSKA3/Noctalia-Speedcrunch-Template). TODO: change when noctalia accepts [PR](https://github.com/noctalia-dev/community-templates/pull/156).
 
 #### Authenticator
 
@@ -609,7 +618,7 @@ You can also hold `Shift` down while using these keybinds to move around windows
 | :--- | :--- |
 | `Mod` + `A` | Authenticator |
 | `Mod` + `S` | Localsend (Share) |
-| `Mod` + `C` | Calculator |
+| `Mod` + `C` | Calculator (SpeedCrunch) |
 | `Mod` + `G` | Gemini (AI) |
 | `Mod` + `B` | Helium (Browser) |
 | `Mod` + `P` | Proton Pass (Passwords) |
