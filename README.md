@@ -393,6 +393,10 @@ Helium browser does ship with Digital Rights Management (DRM) software and thus 
 >    ```bash
 >    mv extracted/opt/google/chrome/WidevineCdm ~/.config/net.imput.helium/WidevineCdm/<Widevine version>
 >    ```
+> 7. Add execution permisions to libwidevinecdm.so:
+>    ```bash
+>    chmod +x ~/.config/net.imput.helium/WidevineCdm/<Widevine version>/_platform_specific/linux_x64/libwidevinecdm.so
+>    ```
 
 **Addons**
 ```
