@@ -3,6 +3,7 @@ app_icon_color = "primary"
 font_family = "JetBrainsMono Nerd Font"
 
 [shell.launcher]
+layout = "simple"
 auto_paste = "off"
 categories = false
 
