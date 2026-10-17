@@ -131,12 +131,13 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 binds {
 	// Terminal / Application / Menu / Lock screen
-	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn "ghostty" "--gtk-single-instance=true"; }
-	Mod+C		hotkey-overlay-title="Open calculator"				{ spawn-sh "speedcrunch"; } // noctalia msg panel-open launcher '/calc '"; }
-	Mod+S		hotkey-overlay-title="Open localsend"				{ spawn-sh "localsend %U"; }
+	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn-sh "ghostty --gtk-single-instance=true"; }
+	Mod+C		hotkey-overlay-title="Open calculator: SpeedCrunch"		{ spawn-sh "speedcrunch"; }
+	Mod+S		hotkey-overlay-title="Open LocalSend"				{ spawn-sh "localsend"; }
 	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
 	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
-	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass %U"; }
+	Mod+Y		hotkey-overlay-title="Open file browser: Yazi"			{ spawn-sh "ghostty -e yazi"; }
+	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass"; }
 	Mod+A		hotkey-overlay-title="Open 2FA: authenticator"			{ spawn-sh "authenticator"; } // env WEBKIT_DISABLE_DMABUF_RENDERER=1 proton-authenticator"; }
   	Mod+D 		hotkey-overlay-title="Run application launcher" 		{ spawn-sh "noctalia msg panel-open launcher"; }
 	Mod+Escape 	hotkey-overlay-title="Power options" 				{ spawn-sh "noctalia msg panel-open session"; }
