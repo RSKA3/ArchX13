@@ -5,8 +5,8 @@ source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
 [theme.templates]
-builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
-community_ids = [ "telegram", "vscode", "lazygit", "yazi" ]
+builtin_ids = [ "btop", "qt", "gtk3", "gtk4", "ghostty", "niri" ]
+community_ids = [ "telegram", "vscode", "lazygit", "yazi", "obs", "speedcrunch" ]
 
 [backdrop]
 enabled        = true 

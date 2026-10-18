@@ -364,8 +364,6 @@ Calculator
 | :--- | :--- |
 | **Source** | `Extra/speedcrunch` |
 
-Themed with [my own template](https://github.com/RSKA3/Noctalia-Speedcrunch-Template). TODO: change when noctalia accepts [PR](https://github.com/noctalia-dev/community-templates/pull/156).
-
 #### Authenticator
 
 Generate and store 2FA codes.
