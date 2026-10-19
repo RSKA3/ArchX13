@@ -561,6 +561,26 @@ Github Grab, select files to pull from repo.
 
 ---
 
+#### yt-dlp
+
+Audio / Video downloader for YouTube.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/yt-dlp` |
+
+---
+
+#### beets
+
+Music tagger & library organizer.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/beets` |
+
+---
+
 #### fzf
 
 Fuzzy find files.

@@ -5,9 +5,12 @@ image/jpeg=org.gnome.Loupe.desktop
 image/svg+xml=org.gnome.Loupe.desktop
 # Video
 video/mp4=org.gnome.Showtime.desktop
+# Audio
+audio/mpeg=org.gnome.Decibels
 # Directories
 inode/directory=org.gnome.Nautilus.desktop
 # Text files
 application/pdf=org.gnome.Papers.desktop
+application/yaml=codium.desktop
 text/plain=codium.desktop
 text/markdown=codium.desktop

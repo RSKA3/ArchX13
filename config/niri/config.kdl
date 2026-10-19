@@ -75,7 +75,6 @@ window-rule {
 
 }
 
-// localsend resizes itself when launched, maybe one day this will work
 window-rule {
 	match app-id="org.localsend.localsend_app"
  	match app-id="com.belmoussaoui.Authenticator"
@@ -84,6 +83,14 @@ window-rule {
 	open-floating true
  	default-column-width { fixed 400; }
  	default-window-height { fixed 500; }
+	default-floating-position x=50 y=50 relative-to="top-right"
+}
+
+window-rule {
+	match app-id="org.gnome.Decibels"
+	open-floating true
+ 	default-column-width { fixed 500; }
+ 	default-window-height { fixed 260; }
 	default-floating-position x=50 y=50 relative-to="top-right"
 }
 
@@ -107,6 +114,7 @@ window-rule {
 	match app-id="org.localsend.localsend_app"
 	match app-id="com.belmoussaoui.Authenticator"
 	match app-id="com.github.neithern.g4music"
+	match app-id="org.gnome.Decibels"
 	draw-border-with-background false
 	opacity 0.85
 	background-effect {
