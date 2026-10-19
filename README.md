@@ -346,6 +346,16 @@ Ebook reader.
 
 ---
 
+#### Gapless
+
+Music player.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `flathub/com.github.neithern.g4music` |
+
+---
+
 #### Logs
 
 System event log viewer.
@@ -447,7 +457,7 @@ Office Suite.
 
 | Attribute | Details |
 | :--- | :--- |
-| **Source** | `AUR/onlyoffice-bin` |
+| **Source** | `flathub/org.onlyoffice.desktopeditors` |
 
 ---
 
@@ -457,7 +467,7 @@ Sharing files over local network.
 
 | Attribute | Details |
 | :--- | :--- |
-| **Source** | `AUR/localsend-bin` |
+| **Source** | `flathub/org.localsend.localsend_app` |
 
 To configure localsend with firewalld it requires that you enable the port 53317.
 

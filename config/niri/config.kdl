@@ -80,6 +80,7 @@ window-rule {
 	match app-id="org.localsend.localsend_app"
  	match app-id="com.belmoussaoui.Authenticator"
  	match app-id="org.speedcrunch.SpeedCrunch"
+	match app-id="com.github.neithern.g4music"
 	open-floating true
  	default-column-width { fixed 400; }
  	default-window-height { fixed 500; }
@@ -105,6 +106,7 @@ window-rule {
 	match app-id="com.github.johnfactotum.Foliate" title="^Foliate$"
 	match app-id="org.localsend.localsend_app"
 	match app-id="com.belmoussaoui.Authenticator"
+	match app-id="com.github.neithern.g4music"
 	draw-border-with-background false
 	opacity 0.85
 	background-effect {
@@ -132,10 +134,11 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
 	// Terminal / Application / Menu / Lock screen
 	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn-sh "ghostty --gtk-single-instance=true"; }
-	Mod+C		hotkey-overlay-title="Open calculator: SpeedCrunch"		{ spawn-sh "speedcrunch"; }
-	Mod+S		hotkey-overlay-title="Open LocalSend"				{ spawn-sh "localsend"; }
+	Mod+C		hotkey-overlay-title="Open calculator: SpeedCrunch"		{ spawn "speedcrunch"; }
+	Mod+S		hotkey-overlay-title="Open LocalSend"				{ spawn-sh "flatpak run --branch=stable --arch=x86_64 --command=localsend --file-forwarding org.localsend.localsend_app"; }
 	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
 	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
+	Mod+M		hotkey-overlay-title="Open music player: Gapless"		{ spawn-sh "flatpak run --branch=stable --arch=x86_64 --command=g4music --file-forwarding com.github.neithern.g4music"; }
 	Mod+Y		hotkey-overlay-title="Open file browser: Yazi"			{ spawn-sh "ghostty -e yazi"; }
 	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass"; }
 	Mod+A		hotkey-overlay-title="Open 2FA: authenticator"			{ spawn-sh "authenticator"; } // env WEBKIT_DISABLE_DMABUF_RENDERER=1 proton-authenticator"; }
