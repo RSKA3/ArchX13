@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Script that makes current active window floating
+# Resizes it to be width_fraction x height_fraction in size
+# Places it 50 pixels from top and 50 pixels from right
+
+width_fraction=0.4
+height_fraction=0.5
+
+width_percentage="$(awk -v x="$width_fraction" 'BEGIN { print x * 100 }')%"
+height_percentage="$(awk -v y="$height_fraction" 'BEGIN { print y * 100 }')%"
+
+echo $width_percentage
+echo $height_percentage
+
+# Toggle focused window to floating
+niri msg action move-window-to-floating
+
+# Get x and y size
+read -r x y < <(niri msg --json focused-output | jq -r '.logical | "\(.width) \(.height)"')
+
+# Resize window
+niri msg action set-window-width $width_percentage 
+niri msg action set-window-height $height_percentage
+
+# x pos = (window size) * (1 - window percentage) - 50
+x_pos=$(awk -v x="$x" -v width_fraction="$width_fraction" 'BEGIN {print x * (1 - width_fraction) - 50}')
+
+echo $x_pos
+
+# Move window to top right
+niri msg action move-floating-window -x $x_pos -y 50 
