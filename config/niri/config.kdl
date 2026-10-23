@@ -1,4 +1,4 @@
-// xremap to remap application specific shortcuts where not possible otherwise
+//xremap to remap application specific shortcuts where not possible otherwise
 spawn-sh-at-startup "/usr/bin/xremap $HOME/.config/xremap/config.yml"
  
 // Ask applications to omit their client-side decorations
@@ -56,7 +56,7 @@ layout {
 
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
-    xcursor-size 24
+    xcursor-size 24 
 }
 
 
@@ -94,13 +94,22 @@ window-rule {
 	default-floating-position x=50 y=50 relative-to="top-right"
 }
 
+// Nautilus file-picker settings. Niri currently does not support setting dialogue position. 
+window-rule {
+	match app-id="org.gnome.Nautilus" title="^Choose .*"
+ 	open-floating true
+  	default-column-width { fixed 700; }
+  	default-window-height { fixed 500; }
+	default-floating-position x=50 y=50 relative-to="top-right"
+}
+
 window-rule {
 	match app-id="com.belmoussaoui.Authenticator"
 	match app-id="Proton Pass"
 	block-out-from "screen-capture"
 }
 
-// Add blur and opacity to GNOME apps.
+// Add blur and opacity to most apps.
 window-rule {
 	match app-id="Alacritty"
 	match app-id="com.mitchellh.ghostty"
@@ -204,7 +213,7 @@ binds {
 	Mod+Shift+WheelScrollUp         cooldown-ms=150 { move-column-left; }
 	Mod+Shift+WheelScrollDown       cooldown-ms=150 { move-column-right; }
 
-	Mod+MouseRight { toggle-overview; }
+	Mod+MouseMiddle { toggle-overview; }
 
 	// Move between workspaces
 	Mod+1 { focus-workspace 1; }
@@ -233,8 +242,8 @@ binds {
 	Alt+Print   hotkey-overlay-title="Screenshot window" 		{ screenshot-window; }
 
 	// Move the focused window between the floating and the tiling layout.
-	Mod+V       { toggle-window-floating; }
-	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+	Mod+Space       { switch-focus-between-floating-and-tiling; }
+	Mod+Shift+Space { toggle-window-floating; }
 
 	// Display hotkeys
 	Mod+H { show-hotkey-overlay; }

@@ -1,13 +1,15 @@
 # ArchX13
 Documentation for my Thinkpad X13 Gen 1 running Arch Linux.
 
+The same setup is also being ran on an older gaming PC.
+
 **Table of Contents**
 - [Technical information](#technical-information)
   - [Hardware](#hardware)
   - [Filesystem](#filesystem)
     - [File syncing](#file-syncing)
     - [Backups](#backups)
-  - [RAM](#ram)
+  - [Swap](#swap)
   - [Security](#security)
   - [Bootloader & Snapshots](#bootloader--snapshots)
 - [Programs](#programs)
@@ -26,17 +28,16 @@ Documentation for my Thinkpad X13 Gen 1 running Arch Linux.
 
 ### Hardware
 
-CPU: i7-10710U @ 1.10GHz
-
-RAM: 16 GB (2x 8 GB Micron DDR4 SODIMM @ 2667 MHz / rated 3200 MHz)
-
-MEMORY: 256GB NVMe (Intel SSDPEKKF256G8L)
-
----
+| Component | Thinkpad | PC |
+| :--- | :--- | :--- |
+| **CPU** | i7-10710U @ 1.10GHz | Ryzen 5 1600 |
+| **GPU** | *Integrated* | NVIDIA GTX 1060 (6 GB) |
+| **RAM** | 16 GB (2x 8 GB Micron DDR4 SODIMM @ 2667 MHz / rated 3200 MHz) | 2x4 GB DDR4 + 1x8 GB DDR4 |
+| **MEMORY** | 256GB NVMe (Intel SSDPEKKF256G8L) | 512 GB SDA |
 
 ### Filesystem
 
-I have two block devices:
+I have partitioned my memory as such:
 ```
 nvme0n1
 ├─nvme0n1p1   2G        vfat      (unencrypted boot drive)
@@ -45,9 +46,9 @@ nvme0n1
 
 #### btrfs
 
-I have chosen **btrfs** as my filesystem because it supports snapshots, being able to roll back the system is important since Arch is rolling release. 
+I have chosen **btrfs** as my filesystem because it supports snapshots, being able to roll back the system is important since Arch is a rolling release distro. 
 
-I use the default **zstd** compression algorithm with the level set to 1 because I have fast nvme memory and I don't want the CPU limiting my read and write speed.  
+I use the default **zstd** compression algorithm with the level set to 1 because I have fast nvme memory and I don't want the CPU limiting my read and write speed.
 
 As a additional flag I have **noatime** because it conflicts with btrfs' Copy-on-Write. 
 
@@ -88,6 +89,8 @@ Only the root directory is snapshotted and thus important files are [backed up](
 
 #### Backups
 
+Important directories are being synced and backed up with **Syncthing** and **rclone**.
+
 ##### File syncing
 
 Specific directories are being synced between my machines using Syncthing.
@@ -96,9 +99,21 @@ Syncthing is being ran as a user service.
 
 ##### Cloning
 
-TODO: Set up backups with rclone.
+I've set up backups of important files with **rclone** and **Proton Drive**. 
+
+Add remote by following [this](https://rclone.org/protondrive/) guide.
+
+To exclude Syncthing directory, use the flag `--exclude ".stfolder"` when setting up rclone sync.
+
+rclone is not being ran on a timer but triggered by a shell script.
 
 ---
+
+#### Weaknesses
+
+One weakness with syncing files with Syncthing and then cloning them with rclone is that both machines have to be online online for them to sync, which in turn may lead to conflicts if files are edited without syncing first. 
+
+The alternative would be to use **rclone bisync** on a timer, which may be the smarter option. But since both Proton Drive is in beta and bisync seems to be a fairly new addition it seems safer to use the setup mentioned above. Although some people have been able to [use Proton Drive with bisync](https://forum.rclone.org/t/automatic-two-way-proton-drive-sync-on-linux-bisync-systemd-tuned-against-429-rate-limits/54290), it has far too many issues for me to use it Vright now.
 
 ### Swap
 
@@ -111,7 +126,7 @@ I have used **zram-generator** to set up a device with 8 GiB or **half of my RAM
 
 ```ini
 [zram0]
-zram-size = min(ram / 2)
+zram-size = min(8092, ram / 2)
 ```
 
 ---
@@ -139,25 +154,51 @@ Both GRUB and the kernel have been signed:
 /boot/EFI/GRUB/grubx64.efi
 ```
 
-### Firmware & Services
+### Firmware
 
-pipewire pipewire-pulse pipewire-audio pipewire-jack pipewire-alsa
+linux linux-firmware
+
+#### Thinkpad
+
+sof-firmware intel-ucode intel-media-driver vulkan-intel
+
+#### PC
+
+nvidia-580xx-utils amd-ucode
+
+### Services
+
+#### Power
+
+power-profiles-daemon
+
+##### Audio & Video
 
 wireplumber
 
-sof-firmware
+pipewire pipewire-pulse pipewire-audio pipewire-jack pipewire-alsa
 
-intel-ucode
+gstreamer which requires the packages: `gst-libav gst-plugins-bad gst-plugins-ugly`
 
-
-#### Networking & Bluetooth
-
+### Networking
 
 **NetworkManager** is being used with **iwd** as the backend.
 
-TODO mention **systemd-resolved**
+**systemd-resolved** is being used as the DNS-resolver.
 
 A network firewall has been set up by enabling the **firewalld system service**.
+
+#### eduroam
+
+When using iwd as the backend for NetworkManager you need to follow [these](https://wiki.archlinux.org/title/Iwd#eduroam) instructions.
+
+#### VPN
+
+A **wireguard** VPN is set up through NetworkManager.
+
+---
+
+### Bluetooth
 
 **bluez**'s **bluetooth.service** handles bluetooth.
 
@@ -243,6 +284,16 @@ TODO: Reflector here or in services?
 
 The Arch User Repository (AUR) has been enabled by installing [Yet another Yogurt](https://github.com/jguer/yay#binary) (yay). 
 
+The source of the packages are decided on the criteria:
+
+1. Official repos.
+
+2. AUR if officially published there OR requires extensive permissions.
+
+3. Flatpak if officially published there.
+
+4. AUR or Flatpak if not officially published.
+
 ### System
 
 The default associations are included in `ArchX13/config/mimeapps.list`.
@@ -298,6 +349,9 @@ TUI file manager
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/yazi` |
+| **Config Paths** | `~/.config/yazi/keymap.toml` |
+
+package `librsvg` required to view svgs.
 
 ---
 
@@ -311,7 +365,6 @@ Image viewer
 
 ---
 
-
 #### Showtime
 
 Video player.
@@ -319,10 +372,6 @@ Video player.
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/showtime` |
-
-Additional required packages for the gstreamer backend:
-
-`gst-libav gst-plugins-bad gst-plugins-ugly`
 
 ---
 
@@ -531,6 +580,16 @@ Text editor.
 
 ---
 
+#### tealdeer
+
+A rust based cached tldr.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/tealdeer` |
+
+---
+
 #### Xremap
 
 Key remapper.
@@ -631,6 +690,8 @@ NOTE: I am using a Finnish keyboard.
 | `Mod` + `R` | Resize window |
 | `Mod` + `F` | Resize fullscreen |
 | `Mod` + `Shift` + `F` | Fullscreen |
+| `Mod` + `Space` | Toggle Floating |
+| `Mod` + `Shift` + `Space` | Make window float |
 
 In addition these most programs can be navigated similarly with `Ctrl` in place of `Mod`.
 
