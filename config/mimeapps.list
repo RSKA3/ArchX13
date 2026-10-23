@@ -14,3 +14,4 @@ application/pdf=org.gnome.Papers.desktop
 application/yaml=codium.desktop
 text/plain=codium.desktop
 text/markdown=codium.desktop
+text/x-shellscript=vim.desktop

@@ -10,7 +10,7 @@ keymap:
 
   - name: Movement Remaps
     application:
-      only: [org.gnome.Papers, com.belmoussaoui.Authenticator]
+      only: [org.gnome.Papers, com.belmoussaoui.Authenticator, org.gnome.Loupe]
     remap:
       C-j: Left
       C-k: Down
