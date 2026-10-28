@@ -48,9 +48,9 @@ nvme0n1
 
 I have chosen **btrfs** as my filesystem because it supports snapshots, being able to roll back the system is important since Arch is a rolling release distro. 
 
-I use the default **zstd** compression algorithm with the level set to 1 because I have fast nvme memory and I don't want the CPU limiting my read and write speed.
+I use the **zstd** compression algorithm with the level set to 1 on my laptop because I have fast nvme memory and I don't want the CPU limiting my read and write speed. While on my PC I have it set to 3 which is the default.
 
-As a additional flag I have **noatime** because it conflicts with btrfs' Copy-on-Write. 
+As an additional flag I have **noatime** because it conflicts with btrfs' Copy-on-Write. 
 
 ```
 /                   (@)
@@ -83,7 +83,7 @@ systemd-cryptenroll --wipe-slot=tpm2 --tpm2-device=auto \
 
 #### Snapshots
 
-System snapshots are managed with **snapper** and are automatically created with **snap-pac** when updating updating.
+System snapshots are managed with **snapper** and are automatically created with **snap-pac** when updating.
 
 Only the root directory is snapshotted and thus important files are [backed up](#file-syncing).
 
@@ -95,7 +95,7 @@ Important directories are being synced and backed up with **Syncthing** and **rc
 
 Specific directories are being synced between my machines using Syncthing.
 
-Syncthing is being ran as a user service. 
+Syncthing is ran as a user service. 
 
 ##### Cloning
 
@@ -111,9 +111,9 @@ rclone is not being ran on a timer but triggered by a shell script.
 
 #### Weaknesses
 
-One weakness with syncing files with Syncthing and then cloning them with rclone is that both machines have to be online online for them to sync, which in turn may lead to conflicts if files are edited without syncing first. 
+One weakness with syncing files with Syncthing and then cloning them with rclone is that both machines have to be online for them to sync, which in turn may lead to conflicts if files are edited without syncing first. 
 
-The alternative would be to use **rclone bisync** on a timer, which may be the smarter option. But since both Proton Drive is in beta and bisync seems to be a fairly new addition it seems safer to use the setup mentioned above. Although some people have been able to [use Proton Drive with bisync](https://forum.rclone.org/t/automatic-two-way-proton-drive-sync-on-linux-bisync-systemd-tuned-against-429-rate-limits/54290), it has far too many issues for me to use it Vright now.
+The alternative would be to use **rclone bisync** on a timer, which may be the smarter option. But since both Proton Drive is in beta and bisync seems to be a fairly new addition it seems safer to use the setup mentioned above. Although some people have been able to [use Proton Drive with bisync](https://forum.rclone.org/t/automatic-two-way-proton-drive-sync-on-linux-bisync-systemd-tuned-against-429-rate-limits/54290), it has far too many issues for me to use it right now.
 
 ### Swap
 
@@ -126,7 +126,7 @@ I have used **zram-generator** to set up a device with 8 GiB or **half of my RAM
 
 ```ini
 [zram0]
-zram-size = min(8092, ram / 2)
+zram-size = min(8192, ram / 2)
 ```
 
 ---
@@ -164,7 +164,9 @@ sof-firmware intel-ucode intel-media-driver vulkan-intel
 
 #### PC
 
-nvidia-580xx-utils amd-ucode
+Since NVIDIA doesn't support open source drivers the package nvidia-580xx-utils has been downloaded though the AUR.
+
+amd-ucode
 
 ### Services
 
@@ -211,7 +213,7 @@ The kernel lives on another drive and isn't snapshotted. This can yield two kind
 1. Newer kernels may break the system and can't be downgraded without booting from a live usb.
 2. When rolling back, a later kernel may be incompatible with previous versions of programs.  
 
-Hiberanation is not possible with the current setup. This would require a swap device on the SSD. 
+Hibernation is not possible with the current setup. This would require a swap device on the SSD. 
 
 ## Theming
 
@@ -278,11 +280,16 @@ Alternatively all bibata cursor themes can be installed from the AUR: `bibata-cu
 
 I am using **ttf-jetbrains-mono-nerd** as my main font, it can be found in the Extra repository.
 
+Additionally I have installed noto-fonts for maximum compatibility:
+`noto-fonts noto-fonts-cjk noto-fonts-emoji`
+
 ## Programs
 
 TODO: Reflector here or in services?
 
 The Arch User Repository (AUR) has been enabled by installing [Yet another Yogurt](https://github.com/jguer/yay#binary) (yay). 
+
+Flatpak is also used for several programs, flathub has been enabled.
 
 The source of the packages are decided on the criteria:
 
@@ -351,7 +358,7 @@ TUI file manager
 | **Source** | `Extra/yazi` |
 | **Config Paths** | `~/.config/yazi/keymap.toml` |
 
-package `librsvg` required to view svgs.
+package `librsvg` required to view svg's.
 
 ---
 
@@ -365,13 +372,13 @@ Image viewer
 
 ---
 
-#### Showtime
+#### Cine
 
 Video player.
 
 | Attribute | Details |
 | :--- | :--- |
-| **Source** | `Extra/showtime` |
+| **Source** | `flathub/io.github.diegopvlk.Cine` |
 
 ---
 
@@ -441,7 +448,7 @@ Chromium based web browser.
 | :--- | :--- |
 | **Source** | `AUR/helium-browser-bin` |
 
-Helium browser does ship with Digital Rights Management (DRM) software and thus you need to enable it manually:
+Helium browser doesn't ship with Digital Rights Management (DRM) software and thus you need to enable it manually:
 
 > **Note: Enabling DRM for Helium Browser**
 > 1. Download the latest [Chrome `.deb` package](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
@@ -465,7 +472,7 @@ Helium browser does ship with Digital Rights Management (DRM) software and thus 
 >    ```bash
 >    mv extracted/opt/google/chrome/WidevineCdm ~/.config/net.imput.helium/WidevineCdm/<Widevine version>
 >    ```
-> 7. Add execution permisions to libwidevinecdm.so:
+> 7. Add execution permissions to libwidevinecdm.so:
 >    ```bash
 >    chmod +x ~/.config/net.imput.helium/WidevineCdm/<Widevine version>/_platform_specific/linux_x64/libwidevinecdm.so
 >    ```
@@ -487,6 +494,9 @@ Terminal emulator.
 | :--- | :--- |
 | **Source** | `Extra/ghostty` |
 | **Config Path** | `~/.config/ghostty/config.ghostty` |
+
+On laptop I had an issue where btop refused to display because the font size was too big.
+I have thus modified the btop.desktop entry so that it launches ghostty in a smaller font size.
 
 ---
 
@@ -576,7 +586,7 @@ Text editor.
 
 | Attribute | Details |
 | :--- | :--- |
-| **Source** | `AUR/vim` |
+| **Source** | `Extra/vim` |
 
 ---
 
@@ -627,6 +637,15 @@ Audio / Video downloader for YouTube.
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/yt-dlp` |
+
+I often downlaod music with these flags:
+´´´
+yt-dlp -x --audio-format mp3 --embed-metadata \
+  --parse-metadata "playlist_title:%(album)s" \
+  --parse-metadata "playlist_index:%(track_number)s" \
+  -o "%(playlist_title)s/%(playlist_index)02d - %(title)s.%(ext)s" \
+  --cookies-from-browser "chromium:$HOME/.config/net.imput.helium"
+´´´
 
 ---
 

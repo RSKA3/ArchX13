@@ -4,7 +4,8 @@ image/png=org.gnome.Loupe.desktop
 image/jpeg=org.gnome.Loupe.desktop
 image/svg+xml=org.gnome.Loupe.desktop
 # Video
-video/mp4=org.gnome.Showtime.desktop
+video/mp4=io.github.diegopvlk.Cine.desktop
+video/x-matroska=io.github.diegopvlk.Cine.desktop # .mkv
 # Audio
 audio/mpeg=org.gnome.Decibels
 # Directories
@@ -15,3 +16,4 @@ application/yaml=codium.desktop
 text/plain=codium.desktop
 text/markdown=codium.desktop
 text/x-shellscript=vim.desktop
+x-scheme-handler/stremio=stremio-enhanced.desktop
