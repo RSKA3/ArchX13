@@ -6,7 +6,7 @@ GenericName[ru]=Редактор документов
 Comment=Edit office documents
 Comment[ru]=Редактировать офисные документы
 Type=Application
-Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors --system-title-bar @@u %U @@
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors --system-title-bar @@u %U @@  
 Terminal=false
 Icon=org.onlyoffice.desktopeditors
 Keywords=Text;Document;OpenDocument Text;Microsoft Word;Microsoft Works;odt;doc;docx;rtf;
