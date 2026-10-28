@@ -12,3 +12,4 @@ prefix = ""
 
 [shell.panel]
 launcher_placement = "attached"
+clipboard_placement = "attached"
