@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# Nautilus script: annotate the selected image(s) with Noctalia.
+#
+# Install: symlink ~/ArchX13/scripts/nautilus ~/.local/share/nautilus/scripts
+# Usage: right-click an image in Nautilus -> Scripts -> Annotate Image
+
+notify() {
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send -a "Annotate Image" "$1" "$2"
+    else
+        echo "$1: $2" >&2
+    fi
+}
+
+if ! command -v noctalia >/dev/null 2>&1; then
+    notify "Annotate Image" "The 'noctalia' command was not found in PATH."
+    exit 1
+fi
+
+# Nautilus passes the selected files as arguments.
+# Fall back to NAUTILUS_SCRIPT_SELECTED_FILE_PATHS (newline-separated) if none.
+if [ "$#" -eq 0 ] && [ -n "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" ]; then
+    mapfile -t files <<< "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
+    set -- "${files[@]}"
+fi
+
+if [ "$#" -eq 0 ]; then
+    notify "Annotate Image" "No file selected."
+    exit 1
+fi
+
+annotated=0
+skipped=0
+
+for path in "$@"; do
+    [ -f "$path" ] || { skipped=$((skipped + 1)); continue; }
+
+    mime=$(file --brief --mime-type -- "$path" 2>/dev/null)
+
+    case "$mime" in
+        image/*)
+            path=$(realpath -- "$path")
+            dir=$(dirname -- "$path")
+            base=$(basename -- "$path")
+            if [[ "$base" == *.* ]]; then
+                name="${base%.*}"
+                ext="${base##*.}"
+            else
+                name="$base"
+                ext=""
+            fi
+
+            # Noctalia appends the extension itself, based on --format
+            case "${ext,,}" in
+                jpg|jpeg) format="jpeg"; out_ext="jpg" ;;
+                webp)     format="webp"; out_ext="webp" ;;
+                jxl)      format="jxl";  out_ext="jxl" ;;
+                *)        format="png";  out_ext="png" ;;
+            esac
+
+            # --filename-pattern is a strftime pattern, so escape literal % in names
+            safe_name="${name//%/%%}"
+
+            # photo.png -> photo_annotated.png (or photo_annotated_2.png, ... if taken)
+            stem="${name}_annotated"
+            pattern="${safe_name}_annotated"
+            n=2
+            while [ -e "$dir/$stem.$out_ext" ]; do
+                stem="${name}_annotated_${n}"
+                pattern="${safe_name}_annotated_${n}"
+                n=$((n + 1))
+            done
+
+            # Options must come BEFORE the path: Noctalia joins everything after the
+            # first positional argument into the image path.
+            noctalia msg annotate \
+                --save-to-file \
+                --directory "$dir" \
+                --filename-pattern "$pattern" \
+                --format "$format" \
+                "$path"
+            annotated=$((annotated + 1))
+            ;;
+        *)
+            skipped=$((skipped + 1))
+            ;;
+    esac
+done
+
+if [ "$annotated" -eq 0 ]; then
+    notify "Annotate Image" "Selection is not an image, nothing to annotate."
+    exit 1
+elif [ "$skipped" -gt 0 ]; then
+    notify "Annotate Image" "Skipped $skipped non-image item(s)."
+fi
