@@ -8,6 +8,13 @@ keymap:
       C-A-j: A-Left
       C-A-semicolon: A-Right
 
+  - name: Helium Browser Remaps
+    application:
+      only: [firefox]
+    remap:
+      C-l: C-PageUp
+      C-k: C-PageDown
+
   - name: Movement Remaps
     application:
       only: [org.gnome.Papers, com.belmoussaoui.Authenticator, org.gnome.Loupe]
@@ -16,6 +23,7 @@ keymap:
       C-k: Down
       C-l: Up
       C-semicolon: Right
+      C-d: F9
 
   - name: SpeedCrunch Remaps
     application:

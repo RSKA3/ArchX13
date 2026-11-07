@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# firefox-new-tab-or-window [url]
+
+url="$1"
+
+if niri msg focused-window | grep -qiE 'App ID: "(org\.mozilla\.)?firefox'; then
+    firefox --new-tab "$url"
+else
+    firefox --new-window "$url"
+fi

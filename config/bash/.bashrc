@@ -20,3 +20,5 @@ fi
 
 eval "$(zoxide init bash)"
 
+# Add custom scripts to source
+export PATH="$HOME/ArchX13/scripts:$PATH"

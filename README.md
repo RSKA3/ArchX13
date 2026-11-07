@@ -119,6 +119,8 @@ The alternative would be to use **rclone bisync** on a timer, which may be the s
 
 I've chosen **ZRAM** because it's fast, simple and I don't need hibernation. 
 
+Will probably [eventually](https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html) need to move over to zswap.
+
 I have used **zram-generator** to set up a device with 8 GiB or **half of my RAM**.
 
 #### Configuration File
@@ -287,6 +289,8 @@ Additionally I have installed noto-fonts for maximum compatibility:
 
 TODO: Reflector here or in services?
 
+paccache.timer service has been enabled to clean up pacman cache and leave only 3 most recent versions (the default).
+
 The Arch User Repository (AUR) has been enabled by installing [Yet another Yogurt](https://github.com/jguer/yay#binary) (yay). 
 
 Flatpak is also used for several programs, flathub has been enabled.
@@ -369,6 +373,19 @@ Image viewer
 | Attribute | Details |
 | :--- | :--- |
 | **Source** | `Extra/loupe` |
+
+---
+
+
+#### Gradia
+
+Screenshot annotator.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/gradia` |
+
+*Note: Currently "Take a screenshot..." button does not [work](https://github.com/niri-wm/niri/issues/1983).*
 
 ---
 
@@ -485,6 +502,24 @@ Vimium
 Proton Pass
 ```
 ---
+
+#### Firefox
+
+Web browser.
+
+| Attribute | Details |
+| :--- | :--- |
+| **Source** | `Extra/firefox` |
+
+**Addons**
+```
+Ublock origin
+Dark reader
+Vimium
+Proton Pass
+```
+---
+
 
 #### Ghostty
 

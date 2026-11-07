@@ -111,7 +111,6 @@ window-rule {
 
 // Add blur and opacity to most apps.
 window-rule {
-	match app-id="Alacritty"
 	match app-id="com.mitchellh.ghostty"
 	match app-id="org.gnome.Nautilus"
  	match app-id="org.speedcrunch.SpeedCrunch"
@@ -134,12 +133,20 @@ window-rule {
  
 window-rule {
 	match app-id="helium"
+        match app-id="firefox"
 	match app-id=r#"^chrome-(.+?)-Default$"#
 	draw-border-with-background false
 	opacity 0.90
 	background-effect {
                 blur true
         }
+}
+
+blur {
+  passes 3        // more passes = stronger blur (default: 3)
+  offset 3.0      // sample distance per pass (default: 3.0)
+  noise 0.02      // grain overlay (default: 0.02)
+  saturation 1.0  // color saturation boost (default: 1.5)
 }
 
 hotkey-overlay {
@@ -153,8 +160,8 @@ binds {
 	Mod+T 		hotkey-overlay-title="Open a Terminal: Ghostty" 		{ spawn-sh "ghostty --gtk-single-instance=true"; }
 	Mod+C		hotkey-overlay-title="Open calculator: SpeedCrunch"		{ spawn "speedcrunch"; }
 	Mod+S		hotkey-overlay-title="Open LocalSend"				{ spawn-sh "flatpak run --branch=stable --arch=x86_64 --command=localsend --file-forwarding org.localsend.localsend_app"; }
-	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "helium-browser"; }
-	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
+	Mod+B 		hotkey-overlay-title="Open a browser: Helium" 			{ spawn "firefox"; }
+	Mod+G		hotkey-overlay-title="Open an AI: Gemini"			{ spawn-sh "~/ArchX13/scripts/firefox-new-tab-or-window https://gemini.google.com/"; } // "/opt/helium-browser-bin/helium-wrapper --profile-directory=Default --app-id=gdfaincndogidkdcdkhapmbffkckdkhn"; }
 	Mod+M		hotkey-overlay-title="Open music player: Gapless"		{ spawn-sh "flatpak run --branch=stable --arch=x86_64 --command=g4music --file-forwarding com.github.neithern.g4music"; }
 	Mod+Y		hotkey-overlay-title="Open file browser: Yazi"			{ spawn-sh "ghostty -e yazi"; }
 	Mod+P		hotkey-overlay-title="Open password manager: Proton-pass"	{ spawn-sh "proton-pass"; }
