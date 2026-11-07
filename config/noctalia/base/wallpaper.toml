@@ -1,5 +1,6 @@
 [wallpaper]
 directory = "~/ArchX13/wallpapers"
+transition = [ "diamond", "disc", "fade", "honeycomb", "melt", "pixel", "stripes", "wipe", "zoom" ]
 
 [wallpaper.default]
 path = "~/ArchX13/wallpapers/blue-city.png"

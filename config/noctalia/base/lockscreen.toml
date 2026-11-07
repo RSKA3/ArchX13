@@ -1,7 +1,7 @@
 # Shared lockscreen settings. Per-output widgets and widget_order live in hosts/*.toml
 
 [lockscreen]
-fingerprint = false
+transition = [ "diamond", "disc", "fade", "honeycomb", "melt", "pixel", "stripes", "wipe", "zoom" ]
 
 [lockscreen_widgets]
 enabled = true

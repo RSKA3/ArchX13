@@ -41,3 +41,6 @@ capsule_opacity = 0.0
 capsule_padding = 0
 scale = 1.3
 show_label = false
+
+[widget.workspaces]
+show_labels = false
