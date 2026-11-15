@@ -1,0 +1,16 @@
+#!/bin/bash
+
+src=~/ArchX13/config/yazi
+dest=~/.config/yazi
+backups=~/.config/backups/yazi
+
+# Create target and backups dirs in case they don't exist
+# (only individual files are linked, since yazi also keeps plugins, flavors
+# and package.toml in ~/.config/yazi)
+mkdir -p "$dest" "$backups"
+
+# Move existing keymap (regular file, not a symlink) to ~/.config/backups/yazi
+[ -f "$dest/keymap.toml" ] && [ ! -L "$dest/keymap.toml" ] && mv "$dest/keymap.toml" "$backups/keymap.toml"
+
+# Symlink ~/ArchX13/config/yazi/keymap.toml -> ~/.config/yazi/keymap.toml
+ln -sfn "$src/keymap.toml" "$dest/keymap.toml"
