@@ -119,7 +119,7 @@ The alternative would be to use **rclone bisync** on a timer, which may be the s
 
 I've chosen **ZRAM** because it's fast, simple and I don't need hibernation. 
 
-Will probably [eventually](https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html) need to move over to zswap.
+Will probably [eventually](https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.htmlöf) need to move over to zswap.
 
 I have used **zram-generator** to set up a device with 8 GiB or **half of my RAM**.
 
@@ -517,6 +517,7 @@ Ublock origin
 Dark reader
 Vimium
 Proton Pass
+Pywalfox
 ```
 ---
 

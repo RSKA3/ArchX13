@@ -14,14 +14,15 @@ environment {
 // launch Noctalia
 spawn-at-startup "noctalia"
 
-// monitor setup, symlinked from "ArchX13/config/niri/monitors/[monitor].kdl" to "~/.config/niri/monitor-setup.kdl"
-include "monitor-setup.kdl"
+// monitor setup, symlinked from "./monitors/[monitor].kdl" to "./monitor-setup.kdl"
+// Generally not needed, niri is good at guessing monitor preferences
+// include "monitor-setup.kdl"
 
 input {
 	keyboard {
 		xkb {
 			layout "fi"
-                    		variant "nodeadkeys"
+                    	variant "nodeadkeys" // This is required to fix Ghostty bug of not being able to type "~", don't ask me why
 		}
 	}
 	touchpad {
