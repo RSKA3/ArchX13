@@ -1,0 +1,16 @@
+#!/bin/bash
+
+src=~/ArchX13/config/VSCodium/User
+dest=~/.config/VSCodium/User
+backups=~/.config/backups/VSCodium
+
+# Create target and backups dirs in case they don't exist
+# (only individual files are linked, since VSCodium also keeps its own
+# settings, extensions and state in ~/.config/VSCodium/User)
+mkdir -p "$dest" "$backups"
+
+# Move existing keybindings (regular file, not a symlink) to ~/.config/backups/VSCodium
+[ -f "$dest/keybindings.json" ] && [ ! -L "$dest/keybindings.json" ] && mv "$dest/keybindings.json" "$backups/keybindings.json"
+
+# Symlink ~/ArchX13/config/VSCodium/User/keybindings.json -> ~/.config/VSCodium/User/keybindings.json
+ln -sfn "$src/keybindings.json" "$dest/keybindings.json"

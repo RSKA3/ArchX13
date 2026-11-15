@@ -1,13 +1,26 @@
 #!/bin/bash
 
+src=~/ArchX13/config/niri
+dest=~/.config/niri
+backups=~/.config/backups/niri
+
 # Get and validate display argument
 conf=$(~/ArchX13/scripts/install/prompt-display "$1")
 
-# Create backups dir in case doesn't exist
-mkdir -p ~/.config/backups/
-# Move existing niri config to ~/.config/backups/niri if already exists
-[ -f ~/.config/niri ] && mv ~/.config/niri ~/.config/backups/niri
-# Symlink ~/ArchX13/config/niri -> ~/.config/niri
-ln -sn ~/ArchX13/config/niri ~/.config/niri
-# Symlink monitor specific setup to monitors/monitor.toml
-ln -sn ~/ArchX13/config/niri/monitors/$conf.kdl ~/ArchX13/config/niri/monitors/monitor.kdl
+# If ~/.config/niri is symlinked, then remove it 
+[ -L "$dest" ] && rm "$dest"
+
+# Create target and backups dirs in case they don't exist
+mkdir -p "$dest" "$backups"
+
+# Back up existing regular (non-symlink) files before replacing them
+for f in config.kdl monitors.kdl; do
+    [ -f "$dest/$f" ] && [ ! -L "$dest/$f" ] && mv "$dest/$f" "$backups/$f"
+done
+
+# Symlink ~/ArchX13/config/niri/config.kdl -> ~/.config/niri/config.kdl
+ln -sfn "$src/config.kdl" "$dest/config.kdl"
+# Symlink monitor specific setup -> ~/.config/niri/monitors.kdl
+ln -sfn "$src/monitors/$conf.kdl" "$dest/monitors.kdl"
+# Copy noctalia.kdl only if it doesn't already exist (-n = no clobber)
+cp -n "$src/noctalia-default.kdl" "$dest/noctalia.kdl"

@@ -3,5 +3,5 @@ files = [
     	"base/",              # every *.toml in base/, sorted
 	# symlink prefered [monitor].toml file to "~/ArchX13/config/noctalia/monitors/monitor.toml"
 	# noctalia automatically reads all bottom level config files in config so has to be in ./monitors/
-   	"monitors/monitor.toml" # Can't symlink to bottom level config directory since those files are automatically imported by noctalia
-]
+   	"monitors/monitors.toml"
+] 

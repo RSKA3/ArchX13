@@ -1,6 +1,1 @@
 scripts/personal
-# pc specific symlinks
-config/niri/monitors/monitor.kdl
-config/noctalia/monitors/monitor.toml
-# noctalia theme for niri
-config/niri/noctalia.kdl

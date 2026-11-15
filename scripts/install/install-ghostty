@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mkdir -p ~/.config/backups/
+mkdir -p ~/.config/ghostty/
+# Move existing noctalia config to ~/.config/backups/noctalia if already exists
+[ -f ~/.config/ghostty/config.ghostty ] && mv ~/.config/ghostty/config.ghostty ~/.config/backups/ghostty/config.ghostty
+# Create ghostty dir if not exists and symlink files to it
+mkdir -p ~/.config/ghostty/
+# Have to use -f flag because ghostty automatically creates own config files
+ln -sn ~/ArchX13/config/ghostty/config.ghostty ~/.config/ghostty/config.ghostty

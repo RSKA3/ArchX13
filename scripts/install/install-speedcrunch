@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p ~/.config/SpeedCrunch
+# Move existing speedcrunch config to ~/.config/backups/SpeedCrunch/ 
+[ -f ~/.config/SpeedCrunch/SpeedCrunch.ini ] && mv  ~/.config/SpeedCrunch/SpeedCrunch.ini ~/.config/backups/SpeedCrunch/SpeedCrunch.ini
+
+# This file should only be copied over once
+cp ~/ArchX13/config/SpeedCrunch/SpeedCrunch.ini ~/.config/SpeedCrunch/SpeedCrunch.ini

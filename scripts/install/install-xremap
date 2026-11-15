@@ -1,0 +1,15 @@
+#!/bin/bash
+
+src=~/ArchX13/config/xremap/xremap.yaml
+dest=~/.config/xremap/config.yml
+backups=~/.config/backups/xremap
+
+# Create target and backups dirs in case they don't exist
+mkdir -p ~/.config/xremap "$backups"
+
+# Move existing xremap config (regular file, not a symlink) to ~/.config/backups/xremap
+[ -f "$dest" ] && [ ! -L "$dest" ] && mv "$dest" "$backups/config.yml"
+
+# Symlink ~/ArchX13/config/xremap/xremap.yaml -> ~/.config/xremap/config.yml
+# (config.yml is the path niri's config.kdl starts xremap with)
+ln -sfn "$src" "$dest"

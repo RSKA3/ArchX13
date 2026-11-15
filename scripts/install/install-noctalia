@@ -10,7 +10,7 @@ mkdir -p ~/.config/backups/
 # Symlink ArchX13 noctalia config to ~/.config/noctalia
 ln -sn ~/ArchX13/config/noctalia ~/.config/noctalia
 # Symlink monitor specific setup to monitors/monitor.toml
-ln -sn ~/ArchX13/config/noctalia/monitors/$conf.toml ~/ArchX13/config/noctalia/monitors/monitor.toml
+ln -sn ~/ArchX13/config/noctalia/monitors/$conf.toml ~/ArchX13/config/noctalia/monitors/monitors.toml
 
 # Regen noctalia templates from default background
 # skipping this will make niri config invalid due to noctalia.kdl not existing

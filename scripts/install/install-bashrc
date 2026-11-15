@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# asume $HOME exists, no need to mkdir.
+# Move existing .bashrc config to ~/.config/backups/bash/ 
+[ -f ~/.bashrc ] && mkdir -p ~/.config/backups/bash/ && mv ~/.bashrc ~/.config/backups/bash/
+
+ln -sn ~/ArchX13/config/bash/.bashrc ~/.bashrc

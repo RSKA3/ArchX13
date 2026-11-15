@@ -14,9 +14,9 @@ environment {
 // launch Noctalia
 spawn-at-startup "noctalia"
 
-// monitor setup, symlinked from "./monitors/[monitor].kdl" to "./monitor-setup.kdl"
+// monitor setup, symlinked from "./monitors/[monitor].kdl" to "./monitors.kdl"
 // Generally not needed, niri is good at guessing monitor preferences
-include "monitors/monitor.kdl"
+include "monitors.kdl"
 
 input {
 	keyboard {

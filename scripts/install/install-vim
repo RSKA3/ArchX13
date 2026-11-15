@@ -1,0 +1,14 @@
+#!/bin/bash
+
+src=~/ArchX13/config/vim/vimrc
+dest=~/.vimrc
+backups=~/.config/backups/vim
+
+# Create backups dir in case it doesn't exist
+mkdir -p "$backups"
+
+# Move existing vimrc (regular file, not a symlink) to ~/.config/backups/vim
+[ -f "$dest" ] && [ ! -L "$dest" ] && mv "$dest" "$backups/vimrc"
+
+# Symlink ~/ArchX13/config/vim/vimrc -> ~/.vimrc
+ln -sfn "$src" "$dest"
