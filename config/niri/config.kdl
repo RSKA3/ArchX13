@@ -202,8 +202,8 @@ binds {
 	Mod+odiaeresis 	{ focus-column-right; }
 
 	Mod+Shift+Left  	{ move-column-left; }
-	Mod+Shift+Down  	{ move-window-up; }
-	Mod+Shift+Up    	{ move-window-down; }
+	Mod+Shift+Down  	{ move-window-down-or-to-workspace-down; }
+	Mod+Shift+Up    	{ move-window-up-or-to-workspace-up; }
 	Mod+Shift+Right 	{ move-column-right; }
 	Mod+Shift+J     	{ move-column-left; }
 	Mod+Shift+K     	{ move-window-down-or-to-workspace-down; }
