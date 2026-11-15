@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get and validate display argument
+conf=$(~/ArchX13/scripts/install/prompt-display "$1")
+
+# Create backups dir in case doesn't exist
+mkdir -p ~/.config/backups/
+# Move existing niri config to ~/.config/backups/niri if already exists
+[ -f ~/.config/niri ] && mv ~/.config/niri ~/.config/backups/niri
+# Symlink ~/ArchX13/config/niri -> ~/.config/niri
+ln -sn ~/ArchX13/config/niri ~/.config/niri
+# Symlink monitor specific setup to monitors/monitor.toml
+ln -sn ~/ArchX13/config/niri/monitors/$conf.toml ~/ArchX13/config/noctalia/monitors/monitor.toml

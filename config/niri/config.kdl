@@ -16,7 +16,7 @@ spawn-at-startup "noctalia"
 
 // monitor setup, symlinked from "./monitors/[monitor].kdl" to "./monitor-setup.kdl"
 // Generally not needed, niri is good at guessing monitor preferences
-// include "monitor-setup.kdl"
+include "monitors/monitor.kdl"
 
 input {
 	keyboard {

@@ -1,5 +1,9 @@
 # Desktop (HDMI-A-1, HDMI-A-2)
 
+# Use ddcutil for external displays
+[brightness]
+enable_ddcutil = false
+
 [lockscreen_widgets]
 enabled = true
 schema_version = 2

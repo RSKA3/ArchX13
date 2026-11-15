@@ -1,0 +1,33 @@
+#!/bin/bash
+
+is_valid_display() {
+    local input=$1
+    case "$input" in
+        1|laptop|2|pc)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+display=$1
+
+# if CLI argument not provided or not valid then prompt user for display config
+while ! is_valid_display "$display"; do
+	echo "What display configuration are you using?" >&2
+    	echo "(1) laptop" >&2
+    	echo "(2) pc" >&2
+    	read -r display
+done
+
+# Normalize the final display choice
+case "$display" in
+    	1|laptop)
+        	echo "laptop"
+        ;;
+    	2|pc)
+        	echo "pc"
+        ;;
+esac
