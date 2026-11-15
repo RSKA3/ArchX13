@@ -10,4 +10,4 @@ mkdir -p ~/.config/backups/
 # Symlink ~/ArchX13/config/niri -> ~/.config/niri
 ln -sn ~/ArchX13/config/niri ~/.config/niri
 # Symlink monitor specific setup to monitors/monitor.toml
-ln -sn ~/ArchX13/config/niri/monitors/$conf.toml ~/ArchX13/config/noctalia/monitors/monitor.toml
+ln -sn ~/ArchX13/config/niri/monitors/$conf.kdl ~/ArchX13/config/niri/monitors/monitor.kdl

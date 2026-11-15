@@ -1,0 +1,11 @@
+output "Acer Technologies XV272U KV 90450F5244203" {
+	mode "2560x1440@143.912"
+	scale 1
+	position x=0 y=0
+}
+
+output "HP Inc. HP Z27n G2 6CM8041BBC" {
+         mode "2560x1440@74.971"
+         scale 1 
+	 position x=2560 y=0
+}
