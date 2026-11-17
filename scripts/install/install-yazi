@@ -14,3 +14,4 @@ mkdir -p "$dest" "$backups"
 
 # Symlink ~/ArchX13/config/yazi/keymap.toml -> ~/.config/yazi/keymap.toml
 ln -sfn "$src/keymap.toml" "$dest/keymap.toml"
+ln -sfn "$src/yazi.toml" "$dest/yazi.toml"
