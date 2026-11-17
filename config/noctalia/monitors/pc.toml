@@ -2,7 +2,7 @@
 
 # Use ddcutil for external displays
 [brightness]
-enable_ddcutil = false
+enable_ddcutil = true 
 
 [lockscreen_widgets]
 enabled = true
