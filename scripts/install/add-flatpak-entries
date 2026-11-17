@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p ~/.local/share/flatpak/exports/share/applications/
+ln -sn ~/ArchX13/applications/flatpak ~/.local/share/flatpak/exports/share/applications/ArchX13 

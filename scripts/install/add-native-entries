@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p ~/.local/share/applications/
+ln -sn ~/ArchX13/applications/native ~/.local/share/applications/ArchX13

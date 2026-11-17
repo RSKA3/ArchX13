@@ -1,0 +1,4 @@
+#!/bin/bash
+
+~/ArchX13/scripts/install/add-native-entries
+~/ArchX13/scripts/install/add-flatpak-entries
