@@ -18,8 +18,6 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
    eval "$(ssh-agent -s)" > /dev/null
 fi
 
-eval "$(zoxide init bash)"
-
 # Add custom scripts to source
 export PATH="$HOME/ArchX13/scripts:$PATH"
 

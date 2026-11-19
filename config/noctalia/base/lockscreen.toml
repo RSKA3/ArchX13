@@ -2,6 +2,7 @@
 
 [lockscreen]
 transition = [ "diamond", "disc", "fade", "honeycomb", "melt", "pixel", "stripes", "wipe", "zoom" ]
+fingerprint = true
 
 [lockscreen_widgets]
 enabled = true
